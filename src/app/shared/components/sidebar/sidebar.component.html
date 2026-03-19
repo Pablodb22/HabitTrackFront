@@ -1,0 +1,46 @@
+<aside class="sidebar" [class.open]="isOpen">
+  <div class="logo-area">
+    <div class="bg-accent d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: 12px; min-width: 36px;">
+      <i class="bi bi-flower3 text-white" style="font-size: 1.1rem;"></i>
+    </div>
+    <span class="logo-text fw-bold" style="font-size: 1rem; color: var(--ht-text);">HabitTrack</span>
+  </div>
+
+  <nav class="flex-grow-1 overflow-auto">
+    <div class="px-3 mb-2" style="min-height: 16px;">
+      <span class="link-text" style="font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ht-text-light); font-weight: 600;">Menú</span>
+    </div>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="onClose()">
+      <i class="bi bi-grid-1x2"></i>
+      <span class="link-text">Dashboard</span>
+    </a>
+    <a routerLink="/my-habits" routerLinkActive="active" class="nav-link" (click)="onClose()">
+      <i class="bi bi-check2-circle"></i>
+      <span class="link-text">Mis hábitos</span>
+    </a>
+    <a routerLink="/analytics" routerLinkActive="active" class="nav-link" (click)="onClose()">
+      <i class="bi bi-bar-chart-line"></i>
+      <span class="link-text">Estadísticas</span>
+    </a>
+    <a routerLink="/settings" routerLinkActive="active" class="nav-link" (click)="onClose()">
+      <i class="bi bi-sliders"></i>
+      <span class="link-text">Ajustes</span>
+    </a>
+  </nav>
+
+  <div class="mt-auto px-3 pt-3" style="border-top: 1.5px solid var(--ht-border);">
+    <div class="dropdown">
+      <button class="btn btn-ghost w-100 p-2 d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
+        <img src="https://ui-avatars.com/api/?name=Alex+Rivera&background=F5F0EB&color=9B9590&rounded=true&bold=true" alt="User" class="rounded-circle" width="32" height="32" style="min-width: 32px;">
+        <div class="flex-grow-1 overflow-hidden link-text" style="text-align: left;">
+          <div class="text-truncate small fw-semibold" style="color: var(--ht-text);">Alex Rivera</div>
+          <div class="text-truncate" style="font-size: 0.7rem; color: var(--ht-text-muted);">alex&#64;ejemplo.com</div>
+        </div>
+      </button>
+      <ul class="dropdown-menu shadow border-0 py-1">
+        <li><a class="dropdown-item py-2" href="#"><i class="bi bi-person me-2"></i> Perfil</a></li>
+        <li><a class="dropdown-item py-2 text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>

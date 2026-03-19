@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { AnalyticsComponent } from './analytics/analytics.component';
-import { SettingsComponent } from './settings/settings.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { MyHabitsComponent } from './my-habits/my-habits.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
-import { HomeComponent } from './home/home.component';
+import { AnalyticsComponent } from './features/analytics/analytics.component';
+import { SettingsComponent } from './features/settings/settings.component';
+import { SignInComponent } from './features/auth/sign-in/sign-in.component';
+import { HabitsComponent } from './features/habits/habits.component';
+import { CreateAccountComponent } from './features/auth/create-account/create-account.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: DashboardComponent },
   { path: 'analytics', component: AnalyticsComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'sign-in', component: SignInComponent },
-  { path: 'my-habits', component: MyHabitsComponent },
+  { path: 'my-habits', component: HabitsComponent },
   { path: 'create-account', component: CreateAccountComponent },
 ];
