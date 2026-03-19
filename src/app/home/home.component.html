@@ -1,0 +1,231 @@
+<div class="container-fluid p-0">
+  <!-- Page Header -->
+  <div class="d-flex justify-content-between align-items-end mb-5">
+    <div>
+      <h2 class="page-title mb-1">Dashboard</h2>
+      <p class="page-subtitle mb-0">Resumen de tu progreso hoy</p>
+    </div>
+    <button class="btn btn-primary d-flex align-items-center gap-2">
+      <i class="bi bi-plus"></i> Nuevo Registro
+    </button>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="row g-3 mb-5">
+    <div class="col-md-3">
+      <div class="card card-tinted-rose p-4" style="border: none;">
+        <div class="d-flex align-items-center gap-3">
+          <div class="kpi-icon bg-rose" style="background: rgba(242,215,217,0.6);">
+            <i class="bi bi-lightning-charge" style="color: #8B5E5E;"></i>
+          </div>
+          <div>
+            <div class="page-subtitle mb-1" style="font-size: 0.75rem;">Activos</div>
+            <div class="h3 mb-0 fw-bold">12</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card card-tinted-sage p-4" style="border: none;">
+        <div class="d-flex align-items-center gap-3">
+          <div class="kpi-icon bg-sage" style="background: rgba(212,226,212,0.6);">
+            <i class="bi bi-check2-all" style="color: #4A6B4A;"></i>
+          </div>
+          <div>
+            <div class="page-subtitle mb-1" style="font-size: 0.75rem;">Completados</div>
+            <div class="h3 mb-0 fw-bold">8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card card-tinted-peach p-4" style="border: none;">
+        <div class="d-flex align-items-center gap-3">
+          <div class="kpi-icon bg-peach" style="background: rgba(245,221,208,0.6);">
+            <i class="bi bi-fire" style="color: #8B5E3E;"></i>
+          </div>
+          <div>
+            <div class="page-subtitle mb-1" style="font-size: 0.75rem;">Mejor racha</div>
+            <div class="h3 mb-0 fw-bold">45<span class="fw-normal" style="font-size: 0.875rem; color: var(--ht-text-muted);">d</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card card-tinted-lavender p-4" style="border: none;">
+        <div class="d-flex align-items-center gap-3">
+          <div class="kpi-icon bg-lavender" style="background: rgba(221,214,232,0.6);">
+            <i class="bi bi-graph-up-arrow" style="color: #5E4D7A;"></i>
+          </div>
+          <div>
+            <div class="page-subtitle mb-1" style="font-size: 0.75rem;">Consistencia</div>
+            <div class="h3 mb-0 fw-bold">94<span class="fw-normal" style="font-size: 0.875rem; color: var(--ht-text-muted);">%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Daily Habits -->
+    <div class="col-lg-7">
+      <div class="mb-3 d-flex justify-content-between align-items-center">
+        <h3 class="h6 fw-semibold mb-0">Hábitos del día</h3>
+        <span class="page-subtitle">3 pendientes</span>
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <!-- Habit 1 (Pending) -->
+        <div class="card p-3 px-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check m-0">
+              <input class="form-check-input" type="checkbox" id="h1">
+            </div>
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <label for="h1" class="fw-semibold small mb-0" style="cursor: pointer;">Lectura de Arquitectura</label>
+                <span class="badge badge-lavender">Productividad</span>
+              </div>
+              <div class="d-flex align-items-center gap-3" style="font-size: 0.75rem; color: var(--ht-text-muted);">
+                <span><i class="bi bi-arrow-repeat me-1"></i> Diario</span>
+                <span><i class="bi bi-fire me-1"></i> 12d racha</span>
+              </div>
+            </div>
+            <div style="width: 72px;">
+              <div class="progress">
+                <div class="progress-bar progress-lavender" role="progressbar" style="width: 65%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Habit 2 (Completed) -->
+        <div class="card card-tinted-sage p-3 px-4 completed-item">
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check m-0">
+              <input class="form-check-input" type="checkbox" id="h2" checked>
+            </div>
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <label for="h2" class="fw-semibold small mb-0" style="text-decoration: line-through; color: var(--ht-text-muted);">Sprint de Codificación</label>
+                <span class="badge badge-sage">Desarrollo</span>
+              </div>
+              <div class="d-flex align-items-center gap-3" style="font-size: 0.75rem; color: var(--ht-text-muted);">
+                <span><i class="bi bi-arrow-repeat me-1"></i> Diario</span>
+                <span><i class="bi bi-fire me-1"></i> 8d racha</span>
+              </div>
+            </div>
+            <div class="pulse-dot"></div>
+          </div>
+        </div>
+
+        <!-- Habit 3 (Pending) -->
+        <div class="card p-3 px-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check m-0">
+              <input class="form-check-input" type="checkbox" id="h3">
+            </div>
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <label for="h3" class="fw-semibold small mb-0" style="cursor: pointer;">Entrenamiento Físico</label>
+                <span class="badge badge-sky">Salud</span>
+              </div>
+              <div class="d-flex align-items-center gap-3" style="font-size: 0.75rem; color: var(--ht-text-muted);">
+                <span><i class="bi bi-arrow-repeat me-1"></i> Lu, Mi, Vi</span>
+                <span><i class="bi bi-fire me-1"></i> 24d racha</span>
+              </div>
+            </div>
+            <div style="width: 72px;">
+              <div class="progress">
+                <div class="progress-bar progress-sage" role="progressbar" style="width: 30%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Habit 4 (Pending) -->
+        <div class="card p-3 px-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check m-0">
+              <input class="form-check-input" type="checkbox" id="h4">
+            </div>
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <label for="h4" class="fw-semibold small mb-0" style="cursor: pointer;">Meditación</label>
+                <span class="badge badge-peach">Mental</span>
+              </div>
+              <div class="d-flex align-items-center gap-3" style="font-size: 0.75rem; color: var(--ht-text-muted);">
+                <span><i class="bi bi-arrow-repeat me-1"></i> Diario</span>
+                <span><i class="bi bi-fire me-1"></i> 15d racha</span>
+              </div>
+            </div>
+            <div style="width: 72px;">
+              <div class="progress">
+                <div class="progress-bar progress-peach" role="progressbar" style="width: 50%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-lg-5">
+      <div class="d-flex flex-column gap-4">
+        <!-- Weekly Bar Chart -->
+        <div class="card p-4">
+          <h3 class="h6 fw-semibold mb-4">Consistencia semanal</h3>
+          <div class="d-flex align-items-end justify-content-between" style="height: 100px;">
+            <div class="rounded-top" style="width: 11%; height: 40%; background: var(--ht-sage);"></div>
+            <div class="rounded-top" style="width: 11%; height: 60%; background: var(--ht-lavender);"></div>
+            <div class="rounded-top" style="width: 11%; height: 55%; background: var(--ht-sage);"></div>
+            <div class="rounded-top" style="width: 11%; height: 80%; background: var(--ht-lavender);"></div>
+            <div class="rounded-top" style="width: 11%; height: 70%; background: var(--ht-sage);"></div>
+            <div class="rounded-top" style="width: 11%; height: 95%; background: var(--ht-accent-soft);"></div>
+            <div class="rounded-top" style="width: 11%; height: 45%; background: var(--ht-cream);"></div>
+          </div>
+          <div class="d-flex justify-content-between mt-2" style="font-size: 0.6875rem; color: var(--ht-text-muted);">
+            <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+          </div>
+        </div>
+
+        <!-- Heatmap -->
+        <div class="card p-4">
+          <h3 class="h6 fw-semibold mb-3">Actividad</h3>
+          <div class="d-flex flex-wrap gap-1">
+            <div class="heatmap-cell level-1"></div>
+            <div class="heatmap-cell level-2"></div>
+            <div class="heatmap-cell level-1"></div>
+            <div class="heatmap-cell"></div>
+            <div class="heatmap-cell level-3"></div>
+            <div class="heatmap-cell"></div>
+            <div class="heatmap-cell level-4"></div>
+            <div class="heatmap-cell level-2"></div>
+            <div class="heatmap-cell level-1"></div>
+            <div class="heatmap-cell level-1"></div>
+            <div class="heatmap-cell level-3"></div>
+            <div class="heatmap-cell"></div>
+            <div class="heatmap-cell level-1"></div>
+            <div class="heatmap-cell level-2"></div>
+            <div class="heatmap-cell level-4"></div>
+            <div class="heatmap-cell level-1"></div>
+            <div class="heatmap-cell"></div>
+            <div class="heatmap-cell level-3"></div>
+            <div class="heatmap-cell level-1"></div>
+            <div class="heatmap-cell"></div>
+            <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]" class="heatmap-cell" [ngClass]="{'level-1': i%3==0, 'level-2': i%5==0, 'level-3': i%7==0}"></div>
+          </div>
+          <div class="d-flex align-items-center justify-content-end gap-1 mt-3" style="font-size: 0.625rem; color: var(--ht-text-muted);">
+            <span>Menos</span>
+            <div class="heatmap-cell" style="width: 9px; height: 9px;"></div>
+            <div class="heatmap-cell level-1" style="width: 9px; height: 9px;"></div>
+            <div class="heatmap-cell level-2" style="width: 9px; height: 9px;"></div>
+            <div class="heatmap-cell level-3" style="width: 9px; height: 9px;"></div>
+            <div class="heatmap-cell level-4" style="width: 9px; height: 9px;"></div>
+            <span>Más</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

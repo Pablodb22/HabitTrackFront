@@ -1,0 +1,117 @@
+<div class="container-fluid p-0">
+  <!-- Page Header -->
+  <div class="d-flex justify-content-between align-items-end mb-5">
+    <div>
+      <h2 class="page-title mb-1">Mis Hábitos</h2>
+      <p class="page-subtitle mb-0">Gestiona y organiza tus rutinas</p>
+    </div>
+    <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#createHabitModal">
+      <i class="bi bi-plus"></i> Crear Hábito
+    </button>
+  </div>
+
+  <!-- Habits Grid -->
+  <div class="row g-4">
+    <div class="col-md-6 col-xl-4" *ngFor="let habit of [
+      {name: 'Lectura de Arquitectura', cat: 'Productividad', freq: 'Diario', streak: '12d', rate: '85%', color: 'lavender', badgeClass: 'badge-lavender'},
+      {name: 'Sprint de Codificación', cat: 'Desarrollo', freq: 'Diario', streak: '8d', rate: '100%', color: 'sage', badgeClass: 'badge-sage'},
+      {name: 'Entrenamiento Físico', cat: 'Salud', freq: 'Lu, Mi, Vi', streak: '24d', rate: '92%', color: 'sky', badgeClass: 'badge-sky'},
+      {name: 'Meditación', cat: 'Mental', freq: 'Diario', streak: '15d', rate: '100%', color: 'peach', badgeClass: 'badge-peach'}
+    ]">
+      <div class="card h-100 p-4" [style.border-left]="'4px solid var(--ht-' + habit.color + ')'">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div class="kpi-icon" [style.background]="'var(--ht-' + habit.color + ')'">
+            <i class="bi bi-bookmark-star" style="color: var(--ht-text-muted);"></i>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-ghost p-1" type="button" data-bs-toggle="dropdown">
+              <i class="bi bi-three-dots" style="color: var(--ht-text-muted);"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i> Editar</a></li>
+              <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i> Eliminar</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="h6 fw-bold mb-1">{{habit.name}}</h3>
+        <div class="mb-3" style="font-size: 0.8125rem; color: var(--ht-text-muted);">{{habit.cat}} · {{habit.freq}}</div>
+
+        <div class="row g-2 mb-4">
+          <div class="col-6">
+            <div class="p-2 rounded-3 text-center" style="background: var(--ht-cream);">
+              <div style="font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ht-text-muted);">Racha</div>
+              <div class="fw-bold">{{habit.streak}}</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="p-2 rounded-3 text-center" style="background: var(--ht-cream);">
+              <div style="font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ht-text-muted);">Tasa</div>
+              <div class="fw-bold">{{habit.rate}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-auto">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span style="font-size: 0.75rem; color: var(--ht-text-muted); font-weight: 500;">Progreso</span>
+            <span style="font-size: 0.75rem; color: var(--ht-accent); font-weight: 600;">{{habit.rate}}</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar progress-accent" role="progressbar" [style.width]="habit.rate"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Habit Modal -->
+  <div class="modal fade" id="createHabitModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pt-4 px-4 pb-2">
+          <h5 class="modal-title fw-bold">Crear Nuevo Hábito</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Nombre del Hábito</label>
+              <input type="text" class="form-control" placeholder="Ej: Leer 30 min">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Categoría</label>
+              <select class="form-select">
+                <option>Productividad</option>
+                <option>Salud</option>
+                <option>Desarrollo</option>
+                <option>Mental</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Frecuencia</label>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-primary flex-grow-1">Diario</button>
+                <button type="button" class="btn btn-outline-secondary flex-grow-1">Semanal</button>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label d-block">Color</label>
+              <div class="d-flex gap-2">
+                <div class="rounded-circle" style="width: 28px; height: 28px; background: var(--ht-lavender); cursor: pointer; border: 2px solid transparent;"></div>
+                <div class="rounded-circle" style="width: 28px; height: 28px; background: var(--ht-sage); cursor: pointer; border: 2px solid transparent;"></div>
+                <div class="rounded-circle" style="width: 28px; height: 28px; background: var(--ht-peach); cursor: pointer; border: 2px solid transparent;"></div>
+                <div class="rounded-circle" style="width: 28px; height: 28px; background: var(--ht-sky); cursor: pointer; border: 2px solid transparent;"></div>
+                <div class="rounded-circle" style="width: 28px; height: 28px; background: var(--ht-rose); cursor: pointer; border: 2px solid transparent;"></div>
+              </div>
+            </div>
+            <div class="d-flex gap-2 mt-4">
+              <button type="button" class="btn btn-outline-secondary w-100 fw-semibold" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary w-100 fw-semibold">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

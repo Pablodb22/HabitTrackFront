@@ -1,0 +1,113 @@
+<div class="container-fluid p-0">
+  <!-- Page Header -->
+  <div class="mb-5">
+    <h2 class="page-title mb-1">Ajustes</h2>
+    <p class="page-subtitle mb-0">Personaliza tu experiencia</p>
+  </div>
+
+  <div class="row g-4">
+    <!-- Settings Navigation -->
+    <div class="col-md-3">
+      <div class="d-flex flex-column gap-1">
+        <a href="#" class="d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-decoration-none fw-medium" style="background: var(--ht-surface); color: var(--ht-text); box-shadow: 0 2px 8px rgba(45,42,38,0.06); font-size: 0.875rem;">
+          <i class="bi bi-person"></i> Perfil
+        </a>
+        <a href="#" class="d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-decoration-none fw-medium" style="color: var(--ht-text-muted); font-size: 0.875rem;">
+          <i class="bi bi-bell"></i> Notificaciones
+        </a>
+        <a href="#" class="d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-decoration-none fw-medium" style="color: var(--ht-text-muted); font-size: 0.875rem;">
+          <i class="bi bi-shield-lock"></i> Seguridad
+        </a>
+        <a href="#" class="d-flex align-items-center gap-2 px-3 py-2 rounded-3 text-decoration-none fw-medium" style="color: var(--ht-text-muted); font-size: 0.875rem;">
+          <i class="bi bi-credit-card"></i> Facturación
+        </a>
+      </div>
+    </div>
+
+    <!-- Settings Content -->
+    <div class="col-md-9">
+      <!-- Profile Section -->
+      <section class="card mb-4 p-4">
+        <h3 class="h6 fw-semibold mb-4">Información del Perfil</h3>
+        <div class="d-flex align-items-center gap-4 mb-4 pb-4" style="border-bottom: 1.5px solid var(--ht-border);">
+          <img src="https://ui-avatars.com/api/?name=Alex+Rivera&background=F5F0EB&color=9B9590&size=64" alt="Avatar" class="rounded-circle" style="border: 2px solid var(--ht-border);">
+          <div>
+            <button class="btn btn-outline-secondary btn-sm mb-1">Cambiar Foto</button>
+            <div style="font-size: 0.75rem; color: var(--ht-text-muted);">JPG, GIF o PNG. Max 800K.</div>
+          </div>
+        </div>
+
+        <form>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Nombre Completo</label>
+              <input type="text" class="form-control" value="Alex Rivera">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Nombre de Usuario</label>
+              <input type="text" class="form-control" value="arivera">
+            </div>
+            <div class="col-12">
+              <label class="form-label">Biografía</label>
+              <textarea class="form-control" rows="3" placeholder="Cuéntanos un poco sobre ti..."></textarea>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" value="alex@ejemplo.com">
+            </div>
+          </div>
+          <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Preferences Section -->
+      <section class="card mb-4 p-4">
+        <h3 class="h6 fw-semibold mb-4">Preferencias</h3>
+
+        <div class="d-flex align-items-center justify-content-between py-3" style="border-bottom: 1.5px solid var(--ht-border);">
+          <div>
+            <div class="fw-semibold" style="font-size: 0.9375rem;">Modo Zen</div>
+            <div style="font-size: 0.8125rem; color: var(--ht-text-muted);">Simplifica la interfaz durante el registro.</div>
+          </div>
+          <div class="form-check form-switch m-0">
+            <input class="form-check-input" type="checkbox" checked style="width: 2.5rem; height: 1.25rem;">
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between py-3" style="border-bottom: 1.5px solid var(--ht-border);">
+          <div>
+            <div class="fw-semibold" style="font-size: 0.9375rem;">Alertas de Racha</div>
+            <div style="font-size: 0.8125rem; color: var(--ht-text-muted);">Recibe avisos antes de que expire tu racha.</div>
+          </div>
+          <div class="form-check form-switch m-0">
+            <input class="form-check-input" type="checkbox" checked style="width: 2.5rem; height: 1.25rem;">
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between py-3">
+          <div>
+            <div class="fw-semibold" style="font-size: 0.9375rem;">Privacidad del Perfil</div>
+            <div style="font-size: 0.8125rem; color: var(--ht-text-muted);">Permite que otros vean tus estadísticas.</div>
+          </div>
+          <div class="form-check form-switch m-0">
+            <input class="form-check-input" type="checkbox" style="width: 2.5rem; height: 1.25rem;">
+          </div>
+        </div>
+      </section>
+
+      <!-- Danger Zone -->
+      <section class="card p-4" style="background: var(--ht-rose);">
+        <h3 class="h6 fw-semibold mb-3" style="color: #8B5E5E;">Zona de Peligro</h3>
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <div class="fw-semibold" style="font-size: 0.9375rem;">Eliminar Cuenta</div>
+            <div style="font-size: 0.8125rem; color: var(--ht-text-muted);">Todos tus datos se borrarán de forma irreversible.</div>
+          </div>
+          <button class="btn" style="background: rgba(139,94,94,0.12); color: #8B5E5E; font-weight: 600; font-size: 0.8125rem;">Eliminar</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

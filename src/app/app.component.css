@@ -1,0 +1,46 @@
+/* App Component Styles */
+
+/* Smooth scrolling */
+.overflow-auto {
+  scroll-behavior: smooth;
+}
+
+/* Main content offset for fixed sidebar */
+.main-content {
+  margin-left: 220px;
+}
+
+/* Mobile overlay */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(45, 42, 38, 0.3);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ── Responsive — Mobile ──────────────────────────── */
+@media (max-width: 767.98px) {
+  .main-content {
+    margin-left: 0 !important;
+  }
+
+  .sidebar {
+    width: 260px !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 8px 0 30px rgba(45, 42, 38, 0.1);
+  }
+}

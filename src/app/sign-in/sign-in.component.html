@@ -1,0 +1,84 @@
+<div class="d-flex w-100 vh-100 align-items-center justify-content-center p-4" style="background: var(--ht-bg);">
+  <div class="card overflow-hidden" style="max-width: 960px; width: 100%; border-radius: 20px;">
+    <div class="row g-0">
+      <!-- Left Side — Form -->
+      <div class="col-md-6 p-5 d-flex flex-column justify-content-center">
+        <div class="mb-5 d-flex align-items-center gap-2">
+          <div class="bg-accent d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; border-radius: 10px;">
+            <i class="bi bi-flower3 text-white" style="font-size: 0.9rem;"></i>
+          </div>
+          <span class="fw-bold" style="font-size: 1rem;">HabitTrack</span>
+        </div>
+
+        <h3 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: -0.02em;">Bienvenido de nuevo</h3>
+        <p class="mb-4 pb-2" style="color: var(--ht-text-muted); font-size: 0.875rem;">Introduce tus credenciales para continuar.</p>
+
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" placeholder="alex@ejemplo.com">
+          </div>
+          <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <label class="form-label mb-0">Contraseña</label>
+              <a href="#" class="text-decoration-none text-accent fw-medium" style="font-size: 0.75rem;">¿Olvidaste tu contraseña?</a>
+            </div>
+            <input type="password" class="form-control" placeholder="••••••••">
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-3 mb-4 fw-semibold">
+            Iniciar Sesión <i class="bi bi-arrow-right ms-2"></i>
+          </button>
+
+          <div class="position-relative mb-4">
+            <hr style="border-color: var(--ht-border);">
+            <span class="position-absolute top-50 start-50 translate-middle px-3 small" style="background: var(--ht-surface); color: var(--ht-text-muted);">o continuar con</span>
+          </div>
+
+          <div class="row g-2">
+            <div class="col-6">
+              <button type="button" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center fw-medium">
+                <i class="bi bi-google me-2"></i> Google
+              </button>
+            </div>
+            <div class="col-6">
+              <button type="button" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center fw-medium">
+                <i class="bi bi-github me-2"></i> GitHub
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <p class="text-center small mt-5 mb-0" style="color: var(--ht-text-muted);">
+          ¿No tienes cuenta? <a routerLink="/create-account" class="text-decoration-none text-accent fw-bold">Regístrate</a>
+        </p>
+      </div>
+
+      <!-- Right Side — Geometric Art -->
+      <div class="col-md-6 d-none d-md-block p-3">
+        <div class="auth-visual h-100 w-100 d-flex flex-column justify-content-end p-5" style="border-radius: 16px; min-height: 500px;">
+          <!-- Decorative geometric shapes -->
+          <div class="geo-circle geo-float-circle" style="width: 120px; height: 120px; background: var(--ht-rose); top: 40px; right: 60px; opacity: 0.7;"></div>
+          <div class="geo-square geo-float" style="width: 80px; height: 80px; background: var(--ht-sage); top: 120px; left: 40px; opacity: 0.6;"></div>
+          <div class="geo-circle geo-float-circle" style="width: 60px; height: 60px; background: var(--ht-lavender); bottom: 180px; right: 40px; opacity: 0.5; animation-delay: 2s;"></div>
+          <div class="geo-square geo-float" style="width: 100px; height: 100px; background: var(--ht-peach); bottom: 100px; left: 80px; opacity: 0.5; animation-delay: 3s;"></div>
+          <div class="geo-circle" style="width: 40px; height: 40px; background: var(--ht-accent-soft); top: 200px; right: 120px; opacity: 0.4;"></div>
+
+          <div class="position-relative z-1">
+            <i class="bi bi-quote" style="font-size: 2rem; color: var(--ht-accent); opacity: 0.5;"></i>
+            <h4 class="fw-bold mb-4 lh-base" style="font-size: 1.25rem; color: var(--ht-text);">
+              "HabitTrack transformó mis rutinas dispersas en un sistema de crecimiento diario."
+            </h4>
+            <div class="d-flex align-items-center mt-3">
+              <img src="https://ui-avatars.com/api/?name=Sarah+Jenkins&background=F5F0EB&color=9B9590&rounded=true" alt="User" class="rounded-circle me-3" style="width: 40px; height: 40px; border: 2px solid var(--ht-border);">
+              <div>
+                <div class="fw-bold" style="font-size: 0.875rem;">Sarah Jenkins</div>
+                <div style="font-size: 0.75rem; color: var(--ht-text-muted);">Directora de Productividad</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

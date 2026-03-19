@@ -1,0 +1,99 @@
+<div class="d-flex w-100 vh-100 align-items-center justify-content-center p-4" style="background: var(--ht-bg);">
+  <div class="card overflow-hidden" style="max-width: 960px; width: 100%; border-radius: 20px;">
+    <div class="row g-0 flex-row-reverse">
+      <!-- Right Side — Form -->
+      <div class="col-md-6 p-5 d-flex flex-column justify-content-center">
+        <div class="mb-4 d-flex align-items-center gap-2">
+          <div class="bg-accent d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; border-radius: 10px;">
+            <i class="bi bi-flower3 text-white" style="font-size: 0.9rem;"></i>
+          </div>
+          <span class="fw-bold" style="font-size: 1rem;">HabitTrack</span>
+        </div>
+
+        <h3 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: -0.02em;">Crea tu cuenta</h3>
+        <p class="mb-4 pb-1" style="color: var(--ht-text-muted); font-size: 0.875rem;">Únete y comienza tu transformación.</p>
+
+        <form>
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label">Nombre</label>
+              <input type="text" class="form-control" placeholder="Alex">
+            </div>
+            <div class="col-6">
+              <label class="form-label">Apellido</label>
+              <input type="text" class="form-control" placeholder="Rivera">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" placeholder="correo@ejemplo.com">
+          </div>
+          
+          <div class="mb-4">
+            <label class="form-label">Contraseña</label>
+            <input type="password" class="form-control" placeholder="••••••••">
+            <div class="mt-1" style="font-size: 0.6875rem; color: var(--ht-text-light);">Mínimo 8 caracteres.</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-3 mb-4 fw-semibold">
+            Crear Cuenta <i class="bi bi-person-plus ms-2"></i>
+          </button>
+
+          <div class="position-relative mb-4">
+            <hr style="border-color: var(--ht-border);">
+            <span class="position-absolute top-50 start-50 translate-middle px-3 small" style="background: var(--ht-surface); color: var(--ht-text-muted);">registro con</span>
+          </div>
+
+          <div class="row g-2">
+            <div class="col-6">
+              <button type="button" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center fw-medium">
+                <i class="bi bi-google me-2"></i> Google
+              </button>
+            </div>
+            <div class="col-6">
+              <button type="button" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center fw-medium">
+                <i class="bi bi-github me-2"></i> GitHub
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <p class="text-center small mt-4 mb-0" style="color: var(--ht-text-muted);">
+          ¿Ya tienes cuenta? <a routerLink="/sign-in" class="text-decoration-none text-accent fw-bold">Inicia sesión</a>
+        </p>
+      </div>
+
+      <!-- Left Side — Geometric Art -->
+      <div class="col-md-6 d-none d-md-block p-3">
+        <div class="auth-visual h-100 w-100 d-flex flex-column justify-content-end p-5" style="border-radius: 16px; min-height: 500px;">
+          <!-- Decorative geometric shapes -->
+          <div class="geo-circle geo-float-circle" style="width: 100px; height: 100px; background: var(--ht-lavender); top: 50px; left: 60px; opacity: 0.7;"></div>
+          <div class="geo-square geo-float" style="width: 90px; height: 90px; background: var(--ht-rose); top: 100px; right: 50px; opacity: 0.6; animation-delay: 1s;"></div>
+          <div class="geo-circle geo-float-circle" style="width: 50px; height: 50px; background: var(--ht-sage); bottom: 200px; left: 50px; opacity: 0.5; animation-delay: 2s;"></div>
+          <div class="geo-square geo-float" style="width: 70px; height: 70px; background: var(--ht-sky); bottom: 120px; right: 80px; opacity: 0.5; animation-delay: 3s;"></div>
+          <div class="geo-circle" style="width: 30px; height: 30px; background: var(--ht-accent-soft); top: 220px; left: 150px; opacity: 0.4;"></div>
+
+          <div class="position-relative z-1">
+            <div class="d-flex gap-2 mb-3">
+              <div class="rounded-circle" style="width: 10px; height: 10px; background: var(--ht-rose);"></div>
+              <div class="rounded-circle" style="width: 10px; height: 10px; background: var(--ht-sage);"></div>
+              <div class="rounded-circle" style="width: 10px; height: 10px; background: var(--ht-lavender);"></div>
+            </div>
+            <h4 class="fw-bold mb-4 lh-base" style="font-size: 1.25rem; color: var(--ht-text);">
+              "La consistencia es la única métrica que importa para el crecimiento personal."
+            </h4>
+            <div class="d-flex align-items-center mt-3">
+              <div class="d-flex align-items-center justify-content-center rounded-circle me-3" style="width: 40px; height: 40px; background: var(--ht-cream); border: 2px solid var(--ht-border);">
+                <i class="bi bi-flower3" style="font-size: 1rem; color: var(--ht-accent);"></i>
+              </div>
+              <div>
+                <div class="fw-bold" style="font-size: 0.875rem;">Equipo HabitTrack</div>
+                <div style="font-size: 0.75rem; color: var(--ht-text-muted);">Filosofía central</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
