@@ -1,0 +1,32 @@
+<div class="chatbot-container">
+  <div class="chatbot-panel" [class.active]="isOpen">
+    <div class="chatbot-header">
+      <div class="avatar">
+        <i class="bi bi-robot"></i>
+      </div>
+      <div class="title">Chatbot - HabitTrack</div>
+    </div>
+    
+    <div class="chatbot-messages">
+      <div class="message" *ngFor="let msg of messages" [class.message-bot]="msg.from === 'bot'" [class.message-user]="msg.from === 'user'">
+        {{ msg.text }}
+      </div>
+      
+      <div id="anchor"></div>
+    </div>
+    
+    <div class="chatbot-input">
+      <input type="text" [(ngModel)]="userMessage" (keyup.enter)="sendMessage()" placeholder="Pregúntame algo..." [disabled]="msgInputDisabled">
+      <button (click)="sendMessage()" [disabled]="!userMessage.trim()">
+        <i class="bi bi-send-fill" *ngIf="!msgInputDisabled"></i>
+        <div class="spinner-border spinner-border-sm" role="status" *ngIf="msgInputDisabled">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </button>
+    </div>
+  </div>
+  
+  <button class="chatbot-toggle" [class.active]="isOpen" (click)="toggleChat()">
+    <i class="bi" [class.bi-chat-dots-fill]="!isOpen" [class.bi-x-lg]="isOpen"></i>
+  </button>
+</div>

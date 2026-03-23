@@ -4,11 +4,14 @@ import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { ChatbotComponent } from './shared/components/chatbot/chatbot.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule, SidebarComponent, HeaderComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule, SidebarComponent, HeaderComponent, ChatbotComponent],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
