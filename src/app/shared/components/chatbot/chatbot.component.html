@@ -12,6 +12,18 @@
         {{ msg.text }}
       </div>
       
+      <!-- Conversation Starters (Show if only initial bot message exists) -->
+      <div class="starters-container" *ngIf="messages.length === 1 && !msgInputDisabled">
+        <button 
+          class="starter-chip" 
+          *ngFor="let starter of starters" 
+          (click)="handleStarterClick(starter)"
+          [disabled]="msgInputDisabled"
+        >
+          {{ starter }}
+        </button>
+      </div>
+      
       <div id="anchor"></div>
     </div>
     

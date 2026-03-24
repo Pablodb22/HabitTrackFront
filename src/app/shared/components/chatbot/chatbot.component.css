@@ -122,6 +122,38 @@
   border-top-right-radius: 4px;
 }
 
+.starters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.starter-chip {
+  background-color: white;
+  color: var(--ht-accent);
+  border: 1px solid var(--ht-accent-soft);
+  border-radius: var(--ht-radius-pill);
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+  font-weight: 500;
+}
+
+.starter-chip:hover {
+  background-color: var(--ht-accent-soft);
+  color: var(--ht-accent);
+  transform: translateX(4px);
+}
+
+.starter-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .chatbot-input {
   padding: 1.25rem;
   background: white;

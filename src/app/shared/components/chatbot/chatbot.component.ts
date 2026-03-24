@@ -19,12 +19,23 @@ export class ChatbotComponent {
   userMessage = '';
   msgInputDisabled = false;
   
+  starters: string[] = [
+    '¿Cómo puedo crear un nuevo hábito?',
+    '¿Donde veo mis estadísticas?',
+    '¿Cómo puedo cambiar mi perfil?'
+  ];
+
   messages: Message[] = [
     { from: 'bot', text: '¡Hola! Soy tu asistente de HabitTrack. ¿En qué puedo ayudarte hoy?' }
   ];
 
   toggleChat() {
     this.isOpen = !this.isOpen;
+  }
+
+  handleStarterClick(starter: string) {
+    this.userMessage = starter;
+    this.sendMessage();
   }
 
   sendMessage() {
@@ -50,9 +61,9 @@ export class ChatbotComponent {
 
     if (text.includes('hola') || text.includes('buenos')) {
       response = "¡Hola! Qué alegría volver a verte. ¿Cómo va tu racha hoy?";
-    } else if (text.includes('hábito') || text.includes('habito')) {
+    } else if (text.includes('hábito') || text.includes('habito') || text.includes('crear')) {
       response = "Los hábitos son la clave del éxito. Puedes crearlos desde la sección 'Mis Hábitos'.";
-    } else if (text.includes('configuración') || text.includes('ajustes')) {
+    } else if (text.includes('configuración') || text.includes('ajustes') || text.includes('perfil')) {
       response = "Puedes cambiar tu avatar y datos personales en la pestaña de Ajustes.";
     } else if (text.includes('estadísticas') || text.includes('progreso')) {
       response = "¡Veo que te interesa tu progreso! En 'Analytics' tienes gráficos detallados.";
