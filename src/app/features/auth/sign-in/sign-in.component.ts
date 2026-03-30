@@ -16,8 +16,8 @@ export class SignInComponent {
   private authService = inject(AuthService);
 
   signIn() {
-    if(this.email != '' && this.password != ''){
-            
+    console.log('¡Respuesta del formulario recibida!', this.email, this.password);
+    if(this.email != '' && this.password != ''){            
       this.authService.login({ email: this.email, password: this.password }).subscribe({                
         next: (respuesta) => {
           console.log('¡Respuesta del servidor recibida!', respuesta)          

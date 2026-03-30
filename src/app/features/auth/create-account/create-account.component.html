@@ -17,45 +17,28 @@
           <div class="row g-3 mb-3">
             <div class="col-6">
               <label class="form-label">Nombre</label>
-              <input type="text" class="form-control" placeholder="Alex">
+              <input type="text" class="form-control" placeholder="Alex" [(ngModel)]="name" name="name">
             </div>
             <div class="col-6">
               <label class="form-label">Apellido</label>
-              <input type="text" class="form-control" placeholder="Rivera">
+              <input type="text" class="form-control" placeholder="Rivera" [(ngModel)]="apellido" name="apellido">
             </div>
           </div>
           <div class="mb-3">
             <label class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" placeholder="correo@ejemplo.com">
+            <input type="email" class="form-control" placeholder="correo@ejemplo.com" [(ngModel)]="email" name="email">
           </div>
           
           <div class="mb-4">
             <label class="form-label">Contraseña</label>
-            <input type="password" class="form-control" placeholder="••••••••">
+            <input type="password" class="form-control" placeholder="••••••••" [(ngModel)]="password" name="password">
             <div class="mt-1" style="font-size: 0.6875rem; color: var(--ht-text-light);">Mínimo 8 caracteres.</div>
           </div>
 
-          <button type="submit" class="btn btn-primary w-100 py-3 mb-4 fw-semibold">
+          <button type="submit" class="btn btn-primary w-100 py-3 mb-4 fw-semibold" (click)="create()">
             Crear Cuenta <i class="bi bi-person-plus ms-2"></i>
           </button>
-
-          <div class="position-relative mb-4">
-            <hr style="border-color: var(--ht-border);">
-            <span class="position-absolute top-50 start-50 translate-middle px-3 small" style="background: var(--ht-surface); color: var(--ht-text-muted);">registro con</span>
-          </div>
-
-          <div class="row g-2">
-            <div class="col-6">
-              <button type="button" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center fw-medium">
-                <i class="bi bi-google me-2"></i> Google
-              </button>
-            </div>
-            <div class="col-6">
-              <button type="button" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center fw-medium">
-                <i class="bi bi-github me-2"></i> GitHub
-              </button>
-            </div>
-          </div>
+  
         </form>
 
         <p class="text-center small mt-4 mb-0" style="color: var(--ht-text-muted);">
