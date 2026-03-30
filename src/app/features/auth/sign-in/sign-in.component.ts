@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -14,6 +14,7 @@ export class SignInComponent {
   password: string = '';
   
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   signIn() {
     console.log('¡Respuesta del formulario recibida!', this.email, this.password);
@@ -22,6 +23,7 @@ export class SignInComponent {
         next: (respuesta) => {
           console.log('¡Respuesta del servidor recibida!', respuesta)          
           alert('Bienvenido ' + (respuesta.name || this.email));
+          this.router.navigate(['/']);
         },                
         error: (err) => {
           console.error('Error en el login:', err);
