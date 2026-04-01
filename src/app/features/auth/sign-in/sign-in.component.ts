@@ -23,12 +23,13 @@ export class SignInComponent {
         next: (respuesta) => {
           console.log('¡Respuesta del servidor recibida!', respuesta)          
           alert('Bienvenido ' + (respuesta.name || this.email));
+          localStorage.setItem('email',this.email);
           this.router.navigate(['/']);
         },                
         error: (err) => {
           console.error('Error en el login:', err);
           alert('Error: Credenciales no válidas');
-        }
+        } 
       });
 
     }

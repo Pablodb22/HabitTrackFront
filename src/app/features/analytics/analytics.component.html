@@ -1,48 +1,58 @@
 <div class="container-fluid p-0">
-  <!-- Page Header -->
-  <div class="d-flex justify-content-end align-items-end mb-4">
-    <div class="d-flex gap-2">
-      <button class="btn btn-outline-secondary d-flex align-items-center gap-2">
-        <i class="bi bi-calendar3"></i> Últimos 30 días
-      </button>
-      <button class="btn btn-primary d-flex align-items-center gap-2">
-        <i class="bi bi-download"></i> Reporte
-      </button>
-    </div>
-  </div>
-
+  <!-- Statistics Summary Cards -->
   <div class="row g-4 mb-4">
-    <!-- Main Performance Card -->
-    <div class="col-xl-8">
-      <div class="card h-100 p-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h3 class="h6 fw-semibold mb-0">Rendimiento General</h3>
-          <div class="d-flex gap-2">
-            <span class="badge badge-sage">Completados</span>
-            <span class="badge" style="background: var(--ht-cream); color: var(--ht-text-muted);">Objetivo</span>
+    <div class="col-md-4">
+      <div class="card p-4 border-0">
+        <div class="d-flex align-items-center gap-3">
+          <div class="kpi-icon bg-sage">
+            <i class="bi bi-lightning-charge-fill text-white"></i>
           </div>
-        </div>
-        <!-- Bar Chart -->
-        <div class="d-flex align-items-end justify-content-between pt-4" style="height: 220px;">
-          <div *ngFor="let h of [30, 45, 25, 60, 75, 50, 90, 40, 65, 80, 55, 70]; let i = index"
-               class="rounded-top"
-               [style.height]="h + '%'"
-               [style.background]="i % 2 === 0 ? 'var(--ht-sage)' : 'var(--ht-lavender)'"
-               style="width: 6.5%;"></div>
-        </div>
-        <div class="d-flex justify-content-between mt-3" style="font-size: 0.6875rem; color: var(--ht-text-muted);">
-          <span>Ene</span><span>Feb</span><span>Mar</span><span>Abr</span><span>May</span><span>Jun</span><span>Jul</span><span>Ago</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dic</span>
+          <div>
+            <div class="metric-label">Racha Actual</div>
+            <div class="metric-value">{{ currentStreak }} <small class="h6 text-muted fw-normal">días</small></div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="col-md-4">
+      <div class="card p-4 border-0">
+        <div class="d-flex align-items-center gap-3">
+          <div class="kpi-icon bg-peach">
+            <i class="bi bi-trophy-fill text-white"></i>
+          </div>
+          <div>
+            <div class="metric-label">Mejor Racha</div>
+            <div class="metric-value">{{ bestStreak }} <small class="h6 text-muted fw-normal">días</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-4 border-0">
+        <div class="d-flex align-items-center gap-3">
+          <div class="kpi-icon bg-lavender">
+            <i class="bi bi-graph-up-arrow text-white"></i>
+          </div>
+          <div>
+            <div class="metric-label">Completado Semanal</div>
+            <div class="metric-value">{{ weeklyCompletion }}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Category Distribution -->
-    <div class="col-xl-4">
-      <div class="card h-100 p-4">
-        <h3 class="h6 fw-semibold mb-4">Distribución</h3>
-        <!-- Donut -->
-        <div class="position-relative mx-auto mb-4" style="width: 160px; height: 160px;">
+  <div class="row g-4">
+    <!-- Category Distribution (The one the user liked) -->
+    <div class="col-lg-5">
+      <div class="card h-100 p-4 border-0">
+        <h3 class="h6 fw-semibold mb-4">Distribución por Categoría</h3>
+        
+        <div class="donut-container position-relative mb-4">
           <svg viewBox="0 0 36 36" class="w-100 h-100">
+            <!-- Background circle -->
+            <circle cx="18" cy="18" r="15.9155" fill="none" stroke="var(--ht-cream)" stroke-width="3" />
+            <!-- Segments -->
             <path stroke-dasharray="40, 100" stroke-width="5" fill="none" stroke="var(--ht-lavender)" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
             <path stroke-dasharray="30, 100" stroke-dashoffset="-40" stroke-width="5" fill="none" stroke="var(--ht-sage)" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
             <path stroke-dasharray="20, 100" stroke-dashoffset="-70" stroke-width="5" fill="none" stroke="var(--ht-sky)" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -53,8 +63,8 @@
             <div style="font-size: 0.625rem; color: var(--ht-text-muted);">Total</div>
           </div>
         </div>
-        <!-- Legend -->
-        <div class="d-flex flex-column gap-2">
+
+        <div class="d-flex flex-column gap-3">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-2 small fw-medium">
               <div class="rounded-circle" style="width: 8px; height: 8px; background: var(--ht-lavender);"></div> Productividad
@@ -73,37 +83,33 @@
             </div>
             <span class="small fw-bold">20%</span>
           </div>
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-2 small fw-medium">
-              <div class="rounded-circle" style="width: 8px; height: 8px; background: var(--ht-peach);"></div> Mental
+        </div>
+      </div>
+    </div>
+
+    <!-- Habits that need focus -->
+    <div class="col-lg-7">
+      <div class="card h-100 p-4 border-0">
+        <h3 class="h6 fw-semibold mb-4">Mejorar estos Hábitos</h3>
+        <p class="small text-muted mb-4">Hábitos con menor tasa de cumplimiento esta semana.</p>
+        
+        <div class="habit-needs-focus mt-2">
+          <div *ngFor="let habit of weakestHabits" class="habit-attention-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="rounded-circle" [style.background]="habit.color" style="width: 10px; height: 10px;"></div>
+              <span class="fw-semibold small">{{ habit.name }}</span>
             </div>
-            <span class="small fw-bold">10%</span>
+            <div class="d-flex align-items-center gap-3" style="width: 200px;">
+              <div class="progress w-100" style="height: 6px;">
+                <div class="progress-bar" role="progressbar" 
+                     [style.width]="habit.percentage + '%'" 
+                     [style.background]="habit.color"></div>
+              </div>
+              <span class="small fw-bold text-muted">{{ habit.percentage }}%</span>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Heatmap -->
-  <div class="card p-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h3 class="h6 fw-semibold mb-0">Consistencia Diaria</h3>
-      <div class="d-flex align-items-center gap-2" style="font-size: 0.625rem; color: var(--ht-text-muted);">
-        <span>Menos</span>
-        <div class="d-flex gap-1">
-          <div class="heatmap-cell" style="width: 10px; height: 10px;"></div>
-          <div class="heatmap-cell level-1" style="width: 10px; height: 10px;"></div>
-          <div class="heatmap-cell level-2" style="width: 10px; height: 10px;"></div>
-          <div class="heatmap-cell level-3" style="width: 10px; height: 10px;"></div>
-          <div class="heatmap-cell level-4" style="width: 10px; height: 10px;"></div>
-        </div>
-        <span>Más</span>
-      </div>
-    </div>
-    <div class="d-flex flex-wrap gap-1">
-      <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100]"
-           class="heatmap-cell"
-           [ngClass]="{'level-1': i%3==0, 'level-2': i%5==0, 'level-3': i%7==0, 'level-4': i%11==0}">
       </div>
     </div>
   </div>

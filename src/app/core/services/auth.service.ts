@@ -12,13 +12,7 @@ export class AuthService {
   constructor() {}
 
   login(creedenciales: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, creedenciales).pipe(
-      tap((respuesta: any) => {
-        if (respuesta.token) {
-          localStorage.setItem('token', respuesta.token);
-        }
-      })
-    );
+    return this.http.post(`${this.apiUrl}/login`, creedenciales);
   }
 
   register(datosUsuario: any): Observable<any> {
@@ -26,14 +20,12 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('email');
   }
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+  getUserSettings(email:string): Observable<any> {
+   return this.http.get(`${this.apiUrl}/settings/${email}`);
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
+
 }

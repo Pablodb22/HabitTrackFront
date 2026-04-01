@@ -1,0 +1,65 @@
+.metric-card {
+  border-radius: var(--ht-radius);
+  padding: 1.5rem;
+  background: var(--ht-surface);
+  transition: var(--ht-transition);
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ht-text);
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ht-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.activity-bar {
+  width: 32px;
+  border-radius: 6px;
+  background: var(--ht-sage);
+  transition: var(--ht-transition);
+  position: relative;
+}
+
+.activity-bar:hover {
+  background: var(--ht-accent);
+}
+
+.activity-bar::after {
+  content: attr(data-value) '%';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.625rem;
+  font-weight: 700;
+  opacity: 0;
+  transition: var(--ht-transition);
+}
+
+.activity-bar:hover::after {
+  opacity: 1;
+}
+
+.habit-attention-item {
+  padding: 0.875rem;
+  border-radius: var(--ht-radius-sm);
+  background: var(--ht-bg);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.donut-container {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+}
