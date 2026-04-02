@@ -7,6 +7,7 @@
   flex-direction: column;
   align-items: flex-end;
   font-family: 'DM Sans', sans-serif;
+  pointer-events: none;
 }
 
 .chatbot-toggle {
@@ -23,6 +24,7 @@
   box-shadow: 0 4px 12px rgba(196, 168, 130, 0.3);
   transition: var(--ht-transition);
   border: none;
+  pointer-events: all;
 }
 
 .chatbot-toggle:hover {

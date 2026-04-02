@@ -1,18 +1,16 @@
-<div class="container-fluid p-0" *ngIf="datos; else noData">
+<div class="container-fluid p-0">
   <div class="row g-4">
-    <!-- Settings Content -->
     <div class="col-md-12">
       <!-- Profile Section -->
       <section class="card mb-4 p-4">
         <h3 class="h6 fw-semibold mb-4">Información del Perfil</h3>
         <div class="d-flex align-items-center gap-4 mb-4 pb-4" style="border-bottom: 1.5px solid var(--ht-border);">
-          <img 
-            [src]="datos.fotoPerfil || 'https://ui-avatars.com/api/?name=' + datos.nombre + '&background=F5F0EB&color=9B9590&size=64'" 
-            alt="Avatar" 
-            class="rounded-circle" 
-            style="border: 2px solid var(--ht-border); width: 64px; height: 64px;">
+          <img
+            [src]="fotoperfil || 'https://ui-avatars.com/api/?name=' + (nombre || 'User') + '&background=F5F0EB&color=9B9590&size=64'"
+            alt="Avatar" class="rounded-circle" style="border: 2px solid var(--ht-border); width: 64px; height: 64px;">
           <div>
-            <button class="btn btn-outline-secondary btn-sm mb-1">Cambiar Foto</button>
+            <input type="file" id="fileUpload" style="display: none;" accept="image/png, image/jpeg, image/gif" (change)="onFileSelected($event)">
+            <label for="fileUpload" class="btn btn-outline-secondary btn-sm mb-1">Cambiar Foto</label>
             <div style="font-size: 0.75rem; color: var(--ht-text-muted);">JPG, GIF o PNG. Max 800K.</div>
           </div>
         </div>
@@ -21,44 +19,46 @@
           <div class="row g-3">
             <div class="col-md-6">
               <label class="form-label">Nombre Completo</label>
-              <input type="text" class="form-control" name="nombre" [(ngModel)]="datos.nombre">
+              <input type="text" class="form-control" name="nombre" [(ngModel)]="nombre">
             </div>
             <div class="col-md-6">
               <label class="form-label">Nombre de Usuario</label>
-              <input type="text" class="form-control" name="username" placeholder="username" [(ngModel)]="datos.username">
+              <input type="text" class="form-control" name="username" placeholder="username"
+                [(ngModel)]="username">
             </div>
             <div class="col-12">
               <label class="form-label">Biografía</label>
-              <textarea class="form-control" rows="3" name="biografia" placeholder="Cuéntanos un poco sobre ti..." [(ngModel)]="datos.biografia"></textarea>
+              <textarea class="form-control" rows="3" name="biografia" placeholder="Cuéntanos un poco sobre ti..."
+                [(ngModel)]="biografia"></textarea>
             </div>
             <div class="col-md-6">
               <label class="form-label">Correo Electrónico</label>
-              <input type="email" class="form-control" name="email" [(ngModel)]="datos.email">
+              <input type="email" class="form-control" name="email" disabled [(ngModel)]="datos.email">
             </div>
           </div>
           <div class="mt-4">
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <button type="button" class="btn btn-primary" (click)="guardar()">Guardar Cambios</button>
           </div>
         </form>
       </section>
-      
+
       <!-- Danger Zone -->
-      <section class="card p-4" style="background: var(--ht-rose);">
-        <h3 class="h6 fw-semibold mb-3" style="color: #8B5E5E;">Zona de Peligro</h3>
-        <div class="d-flex align-items-center justify-content-between">
-          <div>
-            <div class="fw-semibold" style="font-size: 0.9375rem;">Eliminar Cuenta</div>
-            <div style="font-size: 0.8125rem; color: var(--ht-text-muted);">Todos tus datos se borrarán de forma irreversible.</div>
-          </div>
-          <button class="btn" style="background: rgba(139,94,94,0.12); color: #8B5E5E; font-weight: 600; font-size: 0.8125rem;">Eliminar</button>
-        </div>
+      <section class="card p-4" style="background: var(--ht-rose);">        
+          <h3 class="h6 fw-semibold mb-3" style="color: #8B5E5E;">Zona de Peligro</h3>
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <div class="fw-semibold" style="font-size: 0.9375rem;">Eliminar Cuenta</div>
+              <div style="font-size: 0.8125rem; color: var(--ht-text-muted);">Todos tus datos se borrarán de forma
+                irreversible.</div>
+            </div>
+            <button type="button" class="btn"
+              style="background: rgba(139,94,94,0.12); color: #8B5E5E; font-weight: 600; font-size: 0.8125rem; position: relative; z-index: 10;"
+              (click)="borrar()">
+              Eliminar
+            </button>
+          </div>        
       </section>
+
     </div>
   </div>
 </div>
-
-<ng-template #noData>
-  <div class="alert alert-warning" role="alert">
-    No se ha podido cargar la información de configuración. Por favor, asegúrate de estar logueado correctamente.
-  </div>
-</ng-template>

@@ -27,5 +27,9 @@ export class AuthService {
    return this.http.get(`${this.apiUrl}/settings/${email}`);
   }
 
+  updateUserSettings(email: string, datos: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/settings/${email}`, datos);
+  }
+
 
 }
