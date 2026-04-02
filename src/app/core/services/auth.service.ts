@@ -31,5 +31,9 @@ export class AuthService {
     return this.http.put(`${this.apiUrl}/settings/${email}`, datos);
   }
 
+  removeUser(email:string):Observable<any>{
+    return this.http.delete(`${this.apiUrl}/remove/${email}`);
+  }
+
 
 }

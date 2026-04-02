@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -15,6 +15,7 @@ export class SettingsComponent implements OnInit {
   datos: any;
   private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   nombre: string = "";
   username: string = "";
@@ -69,7 +70,17 @@ export class SettingsComponent implements OnInit {
   }
 
   borrar() {
-    alert("Se ha eliminado tu cuenta")
+    this.authService.removeUser(this.datos.email).subscribe({
+      next: (res: any) => {
+        alert("Se ha eliminado tu cuenta, redirigiendo a registro");
+        this.router.navigate(['/create-account']);
+        localStorage.removeItem('email');
+      },
+      error: (err: any) => {
+        console.error("Error al eliminar:", err);
+        alert("Error al eliminar la cuenta. Verifica si el backend tiene el endpoint DELETE.");
+      }
+    });
   }
 
 }
