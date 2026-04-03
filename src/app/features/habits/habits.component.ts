@@ -9,5 +9,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './habits.component.css'
 })
 export class HabitsComponent {
+  isModalOpen = false;
 
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
 }

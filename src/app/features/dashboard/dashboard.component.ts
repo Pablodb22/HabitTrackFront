@@ -13,13 +13,14 @@ export class DashboardComponent {
    email=localStorage.getItem('email');
    private router = inject(Router);
    
+   
    constructor(){ 
     if(this.email==null){
       this.router.navigate(['/sign-in'])
     }   
    }
 
-   
-  
+ 
+
 
 }
