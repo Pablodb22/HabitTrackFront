@@ -89,19 +89,47 @@ export class HabitsComponent implements OnInit {
       categoria: this.categoria,
       frecuencia: this.frecuencia,      
       fecha_creacion: this.fecha_creacion,
-      descripcion: this.descripcion,      
+      descripcion: this.descripcion, 
+      completo:false,     
     };
     
     this.HabitoService.crearHabito(nuevoHabito,this.email).subscribe({
       next: (response) => {
         console.log('Habito creado exitosamente:', response); 
-        this.habitos.push(response); // Lo añadimos a la lista visualmente
+        this.habitos.push(response);
         this.closeModal();       
       },
       error: (error) => {
         alert('Error al crear el hábito');
       }
     });   
+  }
+
+  completarHabito(habit: any) {
+    this.HabitoService.completarHabito(habit.id).subscribe({
+      next: (response) => {
+        console.log('Habito completado exitosamente:', response);
+        habit.completo = true; // Actualizamos la UI instantáneamente
+      },
+      error: (error) => {
+        alert('Error al completar el hábito');
+      }
+    });   
+  }
+
+  eliminarHabito(habit: any) {
+    if (confirm(`¿Estás seguro de que deseas eliminar el hábito "${habit.nombre}"?`)) {
+      this.HabitoService.eliminarHabito(habit.id).subscribe({
+        next: () => {
+          console.log('Habito eliminado exitosamente');
+          // Actualizar el array eliminando el hábito visualmente
+          this.habitos = this.habitos.filter(h => h.id !== habit.id);
+        },
+        error: () => {
+          alert('Error al eliminar el hábito');
+        }
+      });
+    }
   }
 
 }

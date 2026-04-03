@@ -18,6 +18,13 @@ export class HabitoService {
   getHabitsByUser(email: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/${email}`);
   }
+  
+  completarHabito(id:number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/complete/${id}`, null);
+  }
 
+  eliminarHabito(id:number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete/${id}`);
+  }
 
 }
