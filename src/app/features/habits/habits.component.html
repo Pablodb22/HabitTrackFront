@@ -124,50 +124,54 @@
       <div class="modal-body py-2">
         <form>
           <div class="mb-3">
-            <label class="form-label">Nombre del Hábito</label>
-            <input type="text" class="form-control" placeholder="Ej. Leer 20 páginas">
+            <label class="form-label" >Nombre del Hábito</label>
+            <input type="text" class="form-control" placeholder="Ej. Leer 20 páginas"  name="nombre" [(ngModel)]="nombre">
           </div>
           
           <div class="row g-3 mb-3">
             <div class="col-md-6">
-              <label class="form-label">Categoría</label>
-              <select class="form-select">
-                <option value="Productividad">Productividad</option>
+              <label class="form-label d-flex align-items-center gap-2">
+                Categoría
+                <div class="rounded-circle transition-all" [style.background]="getCategoryColor()" style="width: 14px; height: 14px; transition: background 0.3s ease;"></div>
+              </label>
+              <select class="form-select" #catSelect (change)="categoria = catSelect.value" name="categoria" [(ngModel)]="categoria">
+                <option value="Productividad" selected>Productividad</option>
                 <option value="Salud">Salud</option>
                 <option value="Mental">Mental</option>
-                <option value="Desarrollo">Desarrollo</option>
-                <option value="Otro">Otro</option>
+                <option value="Desarrollo">Desarrollo</option>                
               </select>
             </div>
             <div class="col-md-6">
               <label class="form-label">Frecuencia</label>
-              <select class="form-select">
-                <option value="Diario">Diario</option>
+              <select class="form-select" #freqSelect (change)="frecuencia = freqSelect.value" name="frecuencia" [(ngModel)]="frecuencia">
+                <option value="Diario" selected>Diario</option>
                 <option value="Semanal">Semanal</option>
                 <option value="Personalizado">Personalizado</option>
               </select>
             </div>
           </div>
 
-          <div class="mb-3">
-            <label class="form-label d-block">Color del Hábito</label>
-            <div class="d-flex gap-2">
-              <div class="rounded-circle" style="width: 32px; height: 32px; background: var(--ht-lavender); cursor: pointer; border: 2px solid var(--ht-border); transition: all 0.2s;"></div>
-              <div class="rounded-circle" style="width: 32px; height: 32px; background: var(--ht-sage); cursor: pointer; border: 2px solid transparent; transition: all 0.2s;"></div>
-              <div class="rounded-circle" style="width: 32px; height: 32px; background: var(--ht-peach); cursor: pointer; border: 2px solid transparent; transition: all 0.2s;"></div>
-              <div class="rounded-circle" style="width: 32px; height: 32px; background: var(--ht-sky); cursor: pointer; border: 2px solid transparent; transition: all 0.2s;"></div>
-              <div class="rounded-circle" style="width: 32px; height: 32px; background: var(--ht-rose); cursor: pointer; border: 2px solid transparent; transition: all 0.2s;"></div>
+          <div class="mb-3 custom-days-animation" *ngIf="frecuencia === 'Personalizado'">
+            <label class="form-label d-block">Días de la semana</label>
+            <div class="d-flex justify-content-between gap-1">
+              <button type="button" *ngFor="let dia of diasSemana" 
+                      class="btn d-flex align-items-center justify-content-center fw-bold transition-all" 
+                      [ngClass]="diasSeleccionados.includes(dia) ? 'btn-primary text-white border-0' : 'btn-outline-secondary'"
+                      style="width: 38px; height: 38px; border-radius: 50%; padding: 0;"
+                      (click)="toggleDia(dia)">
+                {{ dia }}
+              </button>
             </div>
           </div>
 
-          <div class="mb-4">
+          <div class="mb-4 mt-2">
             <label class="form-label">Descripción o Notas (Opcional)</label>
-            <textarea class="form-control" rows="2" placeholder="Agrega más detalles sobre tu hábito..."></textarea>
+            <textarea class="form-control" rows="2" placeholder="Agrega más detalles sobre tu hábito..." name="descripcion" [(ngModel)]="descripcion"></textarea>
           </div>
           
           <div class="d-flex justify-content-end gap-2 mt-4">
             <button type="button" class="btn btn-outline-secondary px-4" (click)="closeModal()">Cancelar</button>
-            <button type="submit" class="btn btn-primary px-4 fw-semibold text-white">Guardar Hábito</button>
+            <button type="button" class="btn btn-primary px-4 fw-semibold text-white" (click)="crearHabito()">Guardar Hábito</button>
           </div>
         </form>
       </div>
