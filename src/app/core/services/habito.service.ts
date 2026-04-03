@@ -15,5 +15,9 @@ export class HabitoService {
     return this.http.post(`${this.apiUrl}/create/${email}`, habito);
   }
 
+  getHabitsByUser(email: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${email}`);
+  }
+
 
 }

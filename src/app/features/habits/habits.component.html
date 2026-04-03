@@ -8,54 +8,50 @@
 
   <!-- Habits Grid -->
   <div class="row g-4">
-    <div class="col-md-6 col-xl-4" *ngFor="let habit of [
-      {name: 'Lectura de Arquitectura', cat: 'Productividad', freq: 'Diario', streak: '12d', rate: '85%', color: 'lavender', badgeClass: 'badge-lavender'},
-      {name: 'Sprint de Codificación', cat: 'Desarrollo', freq: 'Diario', streak: '8d', rate: '100%', color: 'sage', badgeClass: 'badge-sage'},
-      {name: 'Entrenamiento Físico', cat: 'Salud', freq: 'Lu, Mi, Vi', streak: '24d', rate: '92%', color: 'sky', badgeClass: 'badge-sky'},
-      {name: 'Meditación', cat: 'Mental', freq: 'Diario', streak: '15d', rate: '100%', color: 'peach', badgeClass: 'badge-peach'}
-    ]">
-      <div class="card h-100 p-4" [style.border-left]="'4px solid var(--ht-' + habit.color + ')'">
+    <div class="col-md-6 col-xl-4" *ngFor="let habit of habitos">
+      <div class="card h-100 p-4 transition-all" [style.border-left]="'4px solid var(--ht-' + getHabitColorName(habit.categoria) + ')'" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
         <div class="d-flex justify-content-between align-items-start mb-3">
-          <div class="kpi-icon" [style.background]="'var(--ht-' + habit.color + ')'">
-            <i class="bi bi-bookmark-star" style="color: var(--ht-text-muted);"></i>
+          <div class="kpi-icon d-flex justify-content-center align-items-center" [style.background]="'var(--ht-' + getHabitColorName(habit.categoria) + ')'" style="width: 40px; height: 40px; border-radius: 10px;">
+            <i class="bi bi-bookmark-star-fill text-white fs-5" style="opacity: 0.9;"></i>
           </div>
           <div class="dropdown">
-            <button class="btn btn-ghost p-1" type="button" data-bs-toggle="dropdown">
-              <i class="bi bi-three-dots" style="color: var(--ht-text-muted);"></i>
+            <button class="btn btn-ghost p-1 border-0" type="button" data-bs-toggle="dropdown">
+              <i class="bi bi-three-dots text-secondary"></i>
             </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i> Editar</a></li>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+              <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2 text-primary"></i> Editar</a></li>
               <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i> Eliminar</a></li>
             </ul>
           </div>
         </div>
 
-        <h3 class="h6 fw-bold mb-1">{{habit.name}}</h3>
-        <div class="mb-3" style="font-size: 0.8125rem; color: var(--ht-text-muted);">{{habit.cat}} · {{habit.freq}}</div>
-
-        <div class="row g-2 mb-4">
-          <div class="col-6">
-            <div class="p-2 rounded-3 text-center" style="background: var(--ht-cream);">
-              <div style="font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ht-text-muted);">Racha</div>
-              <div class="fw-bold">{{habit.streak}}</div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="p-2 rounded-3 text-center" style="background: var(--ht-cream);">
-              <div style="font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ht-text-muted);">Tasa</div>
-              <div class="fw-bold">{{habit.rate}}</div>
-            </div>
-          </div>
+        <h3 class="h5 fw-bold mb-2" style="color: var(--ht-text-dark);">{{habit.nombre}}</h3>
+        
+        <div class="mb-3 d-flex align-items-center gap-2">
+          <span class="badge" [style.background]="'var(--ht-' + getHabitColorName(habit.categoria) + ')'" style="color: #fff; font-weight: 600; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem;">
+            {{habit.categoria}}
+          </span>
+          <span style="font-size: 0.8rem; color: var(--ht-text-muted); font-weight: 500;">
+            <i class="bi bi-arrow-repeat me-1"></i> {{habit.frecuencia}}
+          </span>
         </div>
 
-        <div class="mt-auto">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <span style="font-size: 0.75rem; color: var(--ht-text-muted); font-weight: 500;">Progreso</span>
-            <span style="font-size: 0.75rem; color: var(--ht-accent); font-weight: 600;">{{habit.rate}}</span>
+        <!-- Descripción (si existe) -->
+        <p class="mb-4" style="font-size: 0.875rem; color: var(--ht-text-muted); line-height: 1.5; min-height: 2.5rem; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+          {{habit.descripcion || 'Sin descripción adicional.'}}
+        </p>
+
+        <!-- Pie de la tarjeta -->
+        <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
+          <div class="d-flex flex-column">
+             <span style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ht-text-muted);">Creado</span>
+             <span class="fw-bold" style="font-size: 0.85rem; color: var(--ht-text-dark);">
+               <i class="bi bi-calendar-event me-1 text-secondary"></i> {{habit.fecha_creacion | date:'dd MMM, yyyy'}}
+             </span>
           </div>
-          <div class="progress">
-            <div class="progress-bar progress-accent" role="progressbar" [style.width]="habit.rate"></div>
-          </div>
+          <button class="btn btn-sm rounded-pill px-3 fw-bold shadow-sm text-white" [style.background]="'var(--ht-' + getHabitColorName(habit.categoria) + ')'" style="border: none;">
+            Completar <i class="bi bi-check2 ms-1"></i>
+          </button>
         </div>
       </div>
     </div>

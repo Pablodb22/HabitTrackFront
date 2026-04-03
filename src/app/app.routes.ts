@@ -6,12 +6,13 @@ import { HabitsComponent } from './features/habits/habits.component';
 import { CreateAccountComponent } from './features/auth/create-account/create-account.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { dataSettingsResolver } from './core/resolver/data-settings.resolver';
+import { dataHabitsResolver } from './core/resolver/data-habits.resolver';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'analytics', component: AnalyticsComponent },
   { path: 'settings', component: SettingsComponent,resolve:{data:dataSettingsResolver} },
   { path: 'sign-in', component: SignInComponent },
-  { path: 'my-habits', component: HabitsComponent },
+  { path: 'my-habits', component: HabitsComponent,resolve:{data:dataHabitsResolver} },
   { path: 'create-account', component: CreateAccountComponent },
 ];

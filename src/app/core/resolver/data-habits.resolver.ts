@@ -1,10 +1,10 @@
 import { ResolveFn } from '@angular/router';
 import { inject } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { catchError, of } from 'rxjs';
+import { HabitoService } from '../services/habito.service';
 
-export const dataSettingsResolver: ResolveFn<any> = () => {
-  const authService = inject(AuthService);
+export const dataHabitsResolver: ResolveFn<any> = () => {
+  const habitoService = inject(HabitoService);
   const email = localStorage.getItem('email') || '';
 
   if (!email) {
@@ -12,9 +12,9 @@ export const dataSettingsResolver: ResolveFn<any> = () => {
     return of(null);
   }
 
-  return authService.getUserSettings(email).pipe(
+  return habitoService.getHabitsByUser(email).pipe(
     catchError(err => {
-      console.error('Error loading settings:', err);
+      console.error('Error loading habits:' , err);
       return of(null);
     })
   );

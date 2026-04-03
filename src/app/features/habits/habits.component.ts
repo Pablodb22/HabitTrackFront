@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HabitoService } from '../../core/services/habito.service';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-habits',
@@ -10,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './habits.component.html',
   styleUrl: './habits.component.css'
 })
-export class HabitsComponent {
+export class HabitsComponent implements OnInit {
   isModalOpen = false;
   frecuencia = 'Diario';
   categoria = 'Productividad';
@@ -20,8 +21,9 @@ export class HabitsComponent {
   descripcion: string = '';
   fecha_creacion: string = new Date().toISOString().split('T')[0];
   email: string = '';
-
-
+  private route = inject(ActivatedRoute);
+  habitos: any[] = []; // Nuestro array donde guardaremos todos los hábitos
+  datos: any;
 
   private HabitoService=inject(HabitoService)
 
@@ -29,6 +31,27 @@ export class HabitsComponent {
   constructor() {
     this.email = localStorage.getItem('email') || '';
   }
+
+  ngOnInit(): void {
+   this.datos = this.route.snapshot.data['data'];
+   if(this.datos != null){
+      // Guardamos la lista recibida en nuestro array
+      this.habitos = this.datos;
+   }
+   console.log('Hábitos cargados:', this.habitos);
+  }
+
+  // Método auxiliar para pintar las tarjetas según la categoría
+  getHabitColorName(categoria: string): string {
+    switch(categoria) {
+      case 'Productividad': return 'lavender';
+      case 'Salud': return 'sky';
+      case 'Mental': return 'peach';
+      case 'Desarrollo': return 'sage';
+      default: return 'lavender';
+    }
+  }
+
   openModal() {
     this.isModalOpen = true;
   }
@@ -71,10 +94,12 @@ export class HabitsComponent {
     
     this.HabitoService.crearHabito(nuevoHabito,this.email).subscribe({
       next: (response) => {
-        console.log('Habito creado exitosamente:', response);        
+        console.log('Habito creado exitosamente:', response); 
+        this.habitos.push(response); // Lo añadimos a la lista visualmente
+        this.closeModal();       
       },
       error: (error) => {
-        console.error('Error al crear el hábito:', error);
+        alert('Error al crear el hábito');
       }
     });   
   }
