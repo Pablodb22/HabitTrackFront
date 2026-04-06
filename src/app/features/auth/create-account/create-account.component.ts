@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -18,6 +19,7 @@ export class CreateAccountComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);
+  private toastService = inject(ToastService);
  
 
   constructor(){}
@@ -29,13 +31,12 @@ export class CreateAccountComponent {
       let nombreCompleto:string = this.name + " " + this.apellido
       this.authService.register({ email: this.email, password: this.password, nombre: nombreCompleto}).subscribe({                
         next: (respuesta) => {
-          console.log('¡Respuesta del servidor recibida!', respuesta)          
-          alert('Registro exitoso ' + (respuesta.nombre || this.email));
+          this.toastService.success('Registro exitoso ' + (respuesta.nombre || this.email));
           this.router.navigate(['/sign-in']);
         },                
         error: (err) => {
           console.error('Error en el registro:', err);
-          alert('Error: No se pudo crear la cuenta');
+          this.toastService.error('Error: No se pudo crear la cuenta');
         }
       });
     

@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-settings',
@@ -16,6 +17,7 @@ export class SettingsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   nombre: string = "";
   username: string = "";
@@ -37,7 +39,7 @@ export class SettingsComponent implements OnInit {
     const file: File = event.target.files[0];
     if (file) {
       if (file.size > 800 * 1024) {
-        alert("La imagen no puede pesar más de 800KB");
+        this.toastService.error("La imagen no puede pesar más de 800KB");
         return;
       }
       const reader = new FileReader();
@@ -59,11 +61,11 @@ export class SettingsComponent implements OnInit {
     if (this.datos && this.datos.email) {      
       this.authService.updateUserSettings(this.datos.email, payload).subscribe({
         next: (res: any) => {
-          alert("Cambios guardados con éxito");
+          this.toastService.success("Cambios guardados con éxito");
         },
         error: (err: any) => {
           console.error("Error al guardar:", err);
-          alert("Error al guardar cambios. Verifica si el backend tiene el endpoint PUT.");
+          this.toastService.error("Error al guardar cambios");
         }
       });
     }
@@ -72,13 +74,13 @@ export class SettingsComponent implements OnInit {
   borrar() {
     this.authService.removeUser(this.datos.email).subscribe({
       next: (res: any) => {
-        alert("Se ha eliminado tu cuenta, redirigiendo a registro");
+        this.toastService.info("Cuenta eliminada, redirigiendo...");
         this.router.navigate(['/create-account']);
         localStorage.removeItem('email');
       },
       error: (err: any) => {
         console.error("Error al eliminar:", err);
-        alert("Error al eliminar la cuenta. Verifica si el backend tiene el endpoint DELETE.");
+        this.toastService.error("Error al eliminar la cuenta");
       }
     });
   }

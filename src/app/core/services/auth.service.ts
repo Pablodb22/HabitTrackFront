@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   removeUser(email:string):Observable<any>{
-    return this.http.delete(`${this.apiUrl}/remove/${email}`);
+    return this.http.delete(`${this.apiUrl}/${email}`);
   }
 
 

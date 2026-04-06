@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HabitoService } from '../../core/services/habito.service';
+import { ToastService } from '../../core/services/toast.service';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -25,7 +26,8 @@ export class HabitsComponent implements OnInit {
   habitos: any[] = []; // Nuestro array donde guardaremos todos los hábitos
   datos: any;
 
-  private HabitoService=inject(HabitoService)
+  private HabitoService=inject(HabitoService);
+  private toastService=inject(ToastService);
 
 
   constructor() {
@@ -95,12 +97,12 @@ export class HabitsComponent implements OnInit {
     
     this.HabitoService.crearHabito(nuevoHabito,this.email).subscribe({
       next: (response) => {
-        console.log('Habito creado exitosamente:', response); 
+        this.toastService.success('Hábito creado con éxito');
         this.habitos.push(response);
         this.closeModal();       
       },
       error: (error) => {
-        alert('Error al crear el hábito');
+        this.toastService.error('Error al crear el hábito');
       }
     });   
   }
@@ -108,11 +110,11 @@ export class HabitsComponent implements OnInit {
   completarHabito(habit: any) {
     this.HabitoService.completarHabito(habit.id).subscribe({
       next: (response) => {
-        console.log('Habito completado exitosamente:', response);
+        this.toastService.success('Hábito completado ¡Excelente trabajo!');
         habit.completo = true; // Actualizamos la UI instantáneamente
       },
       error: (error) => {
-        alert('Error al completar el hábito');
+        this.toastService.error('Error al completar el hábito');
       }
     });   
   }
@@ -121,12 +123,12 @@ export class HabitsComponent implements OnInit {
     if (confirm(`¿Estás seguro de que deseas eliminar el hábito "${habit.nombre}"?`)) {
       this.HabitoService.eliminarHabito(habit.id).subscribe({
         next: () => {
-          console.log('Habito eliminado exitosamente');
+          this.toastService.success('Hábito eliminado correctamente');
           // Actualizar el array eliminando el hábito visualmente
           this.habitos = this.habitos.filter(h => h.id !== habit.id);
         },
         error: () => {
-          alert('Error al eliminar el hábito');
+          this.toastService.error('Error al eliminar el hábito');
         }
       });
     }

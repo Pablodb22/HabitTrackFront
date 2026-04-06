@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './analytics.component.css'
 })
 export class AnalyticsComponent {
-  // Mock data for easy logic implementation later
+  
   currentStreak = 12;
   bestStreak = 24;
   weeklyCompletion = 82;

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,20 +16,20 @@ export class SignInComponent {
   
   private authService = inject(AuthService);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   signIn() {
     console.log('¡Respuesta del formulario recibida!', this.email, this.password);
     if(this.email != '' && this.password != ''){            
       this.authService.login({ email: this.email, password: this.password }).subscribe({                
         next: (respuesta) => {
-          console.log('¡Respuesta del servidor recibida!', respuesta)          
-          alert('Bienvenido ' + (respuesta.name || this.email));
+          this.toastService.success('Bienvenido ' + (respuesta.name || this.email));
           localStorage.setItem('email',this.email);
           this.router.navigate(['/']);
         },                
         error: (err) => {
           console.error('Error en el login:', err);
-          alert('Error: Credenciales no válidas');
+          this.toastService.error('Error: Credenciales no válidas');
         } 
       });
 

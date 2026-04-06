@@ -1,0 +1,20 @@
+.notification-card {
+  box-shadow: 0 10px 40px rgba(45, 42, 38, 0.15);
+  border-radius: var(--ht-radius);
+  width: 320px;
+}
+
+.custom-toast-animation {
+  animation: slideInUpRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes slideInUpRight {
+  0% {
+    transform: translateY(100%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}

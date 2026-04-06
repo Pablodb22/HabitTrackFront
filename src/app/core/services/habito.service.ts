@@ -12,19 +12,19 @@ export class HabitoService {
   constructor() {}
 
   crearHabito(habito: any, email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/create/${email}`, habito);
+    return this.http.post(`${this.apiUrl}/${email}`, habito);
   }
 
   getHabitsByUser(email: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user/${email}`);
+    return this.http.get(`${this.apiUrl}/${email}`);
   }
   
   completarHabito(id:number): Observable<any> {
-    return this.http.put(`${this.apiUrl}/complete/${id}`, null);
+    return this.http.put(`${this.apiUrl}/${id}`, null);
   }
 
   eliminarHabito(id:number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
 }

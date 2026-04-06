@@ -5,12 +5,13 @@ import { filter } from 'rxjs/operators';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { ChatbotComponent } from './shared/components/chatbot/chatbot.component';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, SidebarComponent, HeaderComponent, ChatbotComponent],
+  imports: [RouterOutlet, CommonModule, SidebarComponent, HeaderComponent, ChatbotComponent, ToastComponent],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
