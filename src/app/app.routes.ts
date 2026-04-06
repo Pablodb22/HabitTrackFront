@@ -10,7 +10,7 @@ import { dataHabitsResolver } from './core/resolver/data-habits.resolver';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },
-  { path: 'analytics', component: AnalyticsComponent },
+  { path: 'analytics', component: AnalyticsComponent, resolve: { data: dataHabitsResolver } },
   { path: 'settings', component: SettingsComponent,resolve:{data:dataSettingsResolver} },
   { path: 'sign-in', component: SignInComponent },
   { path: 'my-habits', component: HabitsComponent,resolve:{data:dataHabitsResolver} },

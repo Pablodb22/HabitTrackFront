@@ -1,115 +1,104 @@
 <div class="container-fluid p-0">
-  <!-- Statistics Summary Cards -->
-  <div class="row g-4 mb-4">
+  <div class="page-header mb-5">
+    <h1 class="page-title mb-1">Análisis de Progreso</h1>
+    <p class="page-subtitle">Tus estadísticas de cumplimiento de hábitos</p>
+  </div>
+
+  <!-- KPI Cards with a Premium Touch -->
+  <div class="row g-4 mb-5">
     <div class="col-md-4">
-      <div class="card p-4 border-0">
-        <div class="d-flex align-items-center gap-3">
-          <div class="kpi-icon bg-sage">
-            <i class="bi bi-lightning-charge-fill text-white"></i>
+      <div class="kpi-card glass-card">
+        <div class="kpi-inner">
+          <div class="kpi-icon-wrap bg-sage-soft">
+            <i class="bi bi-lightning-charge-fill text-sage-dark"></i>
           </div>
-          <div>
-            <div class="metric-label">Racha Actual</div>
-            <div class="metric-value">{{ currentStreak }} <small class="h6 text-muted fw-normal">días</small></div>
+          <div class="kpi-content">
+            <span class="kpi-label">Racha Actual</span>
+            <div class="kpi-value">{{ stats.currentStreak }} <span class="unit">días</span></div>
           </div>
         </div>
+        <div class="kpi-chart-mini-line bg-sage"></div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card p-4 border-0">
-        <div class="d-flex align-items-center gap-3">
-          <div class="kpi-icon bg-peach">
-            <i class="bi bi-trophy-fill text-white"></i>
+      <div class="kpi-card glass-card">
+        <div class="kpi-inner">
+          <div class="kpi-icon-wrap bg-peach-soft">
+            <i class="bi bi-trophy-fill text-peach-dark"></i>
           </div>
-          <div>
-            <div class="metric-label">Mejor Racha</div>
-            <div class="metric-value">{{ bestStreak }} <small class="h6 text-muted fw-normal">días</small></div>
+          <div class="kpi-content">
+            <span class="kpi-label">Mejor Racha</span>
+            <div class="kpi-value">{{ stats.bestStreak }} <span class="unit">días</span></div>
           </div>
         </div>
+        <div class="kpi-chart-mini-line bg-peach"></div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card p-4 border-0">
-        <div class="d-flex align-items-center gap-3">
-          <div class="kpi-icon bg-lavender">
-            <i class="bi bi-graph-up-arrow text-white"></i>
+      <div class="kpi-card glass-card">
+        <div class="kpi-inner">
+          <div class="kpi-icon-wrap bg-lavender-soft">
+            <i class="bi bi-graph-up-arrow text-lavender-dark"></i>
           </div>
-          <div>
-            <div class="metric-label">Completado Semanal</div>
-            <div class="metric-value">{{ weeklyCompletion }}%</div>
+          <div class="kpi-content">
+            <span class="kpi-label">Cumplimiento General</span>
+            <div class="kpi-value">{{ stats.completionRate }}%</div>
           </div>
         </div>
+        <div class="kpi-chart-mini-line bg-lavender"></div>
       </div>
     </div>
   </div>
 
   <div class="row g-4">
-    <!-- Category Distribution (The one the user liked) -->
-    <div class="col-lg-5">
-      <div class="card h-100 p-4 border-0">
-        <h3 class="h6 fw-semibold mb-4">Distribución por Categoría</h3>
-        
-        <div class="donut-container position-relative mb-4">
-          <svg viewBox="0 0 36 36" class="w-100 h-100">
-            <!-- Background circle -->
-            <circle cx="18" cy="18" r="15.9155" fill="none" stroke="var(--ht-cream)" stroke-width="3" />
-            <!-- Segments -->
-            <path stroke-dasharray="40, 100" stroke-width="5" fill="none" stroke="var(--ht-lavender)" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-            <path stroke-dasharray="30, 100" stroke-dashoffset="-40" stroke-width="5" fill="none" stroke="var(--ht-sage)" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-            <path stroke-dasharray="20, 100" stroke-dashoffset="-70" stroke-width="5" fill="none" stroke="var(--ht-sky)" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-            <path stroke-dasharray="10, 100" stroke-dashoffset="-90" stroke-width="5" fill="none" stroke="var(--ht-peach)" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+    <!-- Chart 1: Category Distribution -->
+    <div class="col-lg-5 col-md-12">
+      <div class="card h-100 p-4 border-0 shadow-sm">
+        <h3 class="h5 fw-bold mb-4">Distribución por Categorías</h3>
+        <div class="donut-outer mb-4">
+          <svg viewBox="0 0 36 36" class="donut-chart">
+            <circle class="donut-ring" cx="18" cy="18" r="15.9155" fill="none" stroke="var(--ht-cream)" stroke-width="3"></circle>
+            <circle *ngFor="let cat of categories" 
+                    class="donut-segment" cx="18" cy="18" r="15.9155" fill="none" 
+                    [attr.stroke]="cat.color" stroke-width="4" 
+                    [attr.stroke-dasharray]="cat.percentage + ' ' + (100 - cat.percentage)" 
+                    [attr.stroke-dashoffset]="100 - cat.offset + 25"></circle>
           </svg>
-          <div class="position-absolute top-50 start-50 translate-middle text-center">
-            <div class="h5 mb-0 fw-bold">100%</div>
-            <div style="font-size: 0.625rem; color: var(--ht-text-muted);">Total</div>
+          <div class="donut-center">
+            <span class="percentage">100%</span>
+            <span class="label">Total</span>
           </div>
         </div>
-
-        <div class="d-flex flex-column gap-3">
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-2 small fw-medium">
-              <div class="rounded-circle" style="width: 8px; height: 8px; background: var(--ht-lavender);"></div> Productividad
+        <div class="category-list">
+          <div *ngFor="let cat of categories" class="category-item d-flex align-items-center justify-content-between mb-3 px-3 py-2 rounded-pill bg-light-soft">
+            <div class="d-flex align-items-center gap-2">
+              <span class="dot" [style.background]="cat.color"></span>
+              <span class="name fw-semibold small">{{ cat.name }}</span>
             </div>
-            <span class="small fw-bold">40%</span>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-2 small fw-medium">
-              <div class="rounded-circle" style="width: 8px; height: 8px; background: var(--ht-sage);"></div> Desarrollo
-            </div>
-            <span class="small fw-bold">30%</span>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-2 small fw-medium">
-              <div class="rounded-circle" style="width: 8px; height: 8px; background: var(--ht-sky);"></div> Salud
-            </div>
-            <span class="small fw-bold">20%</span>
+            <span class="val fw-bold text-accent small">{{ cat.percentage }}%</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Habits that need focus -->
-    <div class="col-lg-7">
-      <div class="card h-100 p-4 border-0">
-        <h3 class="h6 fw-semibold mb-4">Mejorar estos Hábitos</h3>
-        <p class="small text-muted mb-4">Hábitos con menor tasa de cumplimiento esta semana.</p>
+    <!-- Chart 3: Weekly Activity (Bar Chart) -->
+    <div class="col-lg-7 col-md-12">
+      <div class="card h-100 p-4 border-0 shadow-sm">
+        <h3 class="h5 fw-bold mb-1">Actividad Semanal</h3>
+        <p class="text-muted small mb-5">Progreso diario de lunes a domingo</p>
         
-        <div class="habit-needs-focus mt-2">
-          <div *ngFor="let habit of weakestHabits" class="habit-attention-item">
-            <div class="d-flex align-items-center gap-3">
-              <div class="rounded-circle" [style.background]="habit.color" style="width: 10px; height: 10px;"></div>
-              <span class="fw-semibold small">{{ habit.name }}</span>
-            </div>
-            <div class="d-flex align-items-center gap-3" style="width: 200px;">
-              <div class="progress w-100" style="height: 6px;">
-                <div class="progress-bar" role="progressbar" 
-                     [style.width]="habit.percentage + '%'" 
-                     [style.background]="habit.color"></div>
+        <div class="bar-chart-container d-flex align-items-end justify-content-between px-3" style="height: 220px;">
+          <div *ngFor="let day of weeklyProgress" class="bar-wrapper d-flex flex-column align-items-center gap-3 h-100">
+            <div class="bar-pill-outer">
+               <div class="bar-pill-inner transition-all" 
+                    [style.height]="day.percentage + '%'"
+                    [style.background]="day.percentage > 80 ? 'var(--ht-sage)' : (day.percentage > 50 ? 'var(--ht-sky)' : 'var(--ht-peach)')">
+                <span class="bar-label">{{ day.percentage }}%</span>
               </div>
-              <span class="small fw-bold text-muted">{{ habit.percentage }}%</span>
             </div>
+            <span class="day-name fw-bold small text-muted">{{ day.day }}</span>
           </div>
         </div>
-
       </div>
     </div>
   </div>
