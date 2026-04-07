@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { HabitoService } from '../../core/services/habito.service';
 
 @Component({
   selector: 'app-analytics',
@@ -12,6 +13,9 @@ import { ActivatedRoute } from '@angular/router';
 export class AnalyticsComponent implements OnInit {
   
   private route = inject(ActivatedRoute);
+  private habitoService = inject(HabitoService);
+  private email = localStorage.getItem('email');
+  
   habitos: any[] = [];
 
   stats = {
@@ -34,54 +38,57 @@ export class AnalyticsComponent implements OnInit {
 
   ngOnInit(): void {    
     this.habitos = this.route.snapshot.data['data'] || [];
-        
-    setTimeout(() => {
-      this.calculateAllAnalytics();
-    }, 100);
+    this.calculateAllAnalytics();
+    this.loadWeeklyStats();
+  }
+
+  loadWeeklyStats(): void {
+    if (!this.email) return;
+    this.habitoService.getWeeklyStats(this.email).subscribe({
+      next: (completions: any[]) => {
+        this.processWeeklyStats(completions);
+      },
+      error: (err) => console.error('Error fetching weekly stats for analytics', err)
+    });
+  }
+
+  processWeeklyStats(completions: any[]): void {
+    const dayNames = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+    const dailyCounts = [0, 0, 0, 0, 0, 0, 0];
+    
+    completions.forEach(c => {
+      const date = new Date(c.fecha);
+      const dayIndex = (date.getDay() + 6) % 7;
+      dailyCounts[dayIndex]++;
+    });
+
+    const totalHabits = this.habitos.length || 1;
+    
+    this.weeklyProgress = dayNames.map((name, index) => {
+      let percentage = (dailyCounts[index] / totalHabits) * 100;
+      if (percentage > 100) percentage = 100;
+      return {
+        day: name,
+        percentage: Math.round(percentage)
+      };
+    });
   }
 
   calculateAllAnalytics() {
     this.calculateCompletionRate();
-    this.calculateWeeklyProgress();
     this.calculateCategoryDistribution();
-        
-    if (this.stats.completionRate > 0) {
-       this.stats.currentStreak = 1; 
-              
-       if (this.stats.currentStreak > this.stats.bestStreak) {
-          this.stats.bestStreak = this.stats.currentStreak;
-       }
+    
+    if (this.habitos.length > 0) {
+      this.stats.currentStreak = Math.max(...this.habitos.map(h => h.currentStreak || 0), 0);
+      this.stats.bestStreak = Math.max(...this.habitos.map(h => h.bestStreak || 0), 0);
     }
   }
-
 
   calculateCompletionRate() {
     if (!this.habitos || this.habitos.length === 0) return;
     const total = this.habitos.length;
     const completed = this.habitos.filter(h => h.completo).length;
     this.stats.completionRate = Math.round((completed / total) * 100);
-  }
-
-  calculateWeeklyProgress() {
-    const today = new Date().getDay(); 
-    const todayIndex = today === 0 ? 6 : today - 1;
-    
-    const newWeeklyProgress = [
-      { day: 'Lun', percentage: 0 },
-      { day: 'Mar', percentage: 0 },
-      { day: 'Mié', percentage: 0 },
-      { day: 'Jue', percentage: 0 },
-      { day: 'Vie', percentage: 0 },
-      { day: 'Sáb', percentage: 0 },
-      { day: 'Dom', percentage: 0 }
-    ];
-
-    if (this.habitos.length > 0) {
-      newWeeklyProgress[todayIndex].percentage = this.stats.completionRate;
-    }
-
-    this.weeklyProgress = [...newWeeklyProgress];
-    console.log("BARRA ACTUALIZADA:", this.weeklyProgress);
   }
 
   calculateCategoryDistribution() {

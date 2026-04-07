@@ -21,25 +21,26 @@
     <a routerLink="/analytics" routerLinkActive="active" class="nav-link" (click)="onClose()">
       <i class="bi bi-bar-chart-line"></i>
       <span class="link-text">Estadísticas</span>
-    </a>
-    <a routerLink="/settings" routerLinkActive="active" class="nav-link" (click)="onClose()">
-      <i class="bi bi-sliders"></i>
-      <span class="link-text">Ajustes</span>
-    </a>
+    </a>    
   </nav>
 
   <div class="mt-auto px-3 pt-3" style="border-top: 1.5px solid var(--ht-border);">
     <div class="dropdown">
-      <button class="btn btn-ghost w-100 p-2 d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
-        <img src="https://ui-avatars.com/api/?name=Alex+Rivera&background=F5F0EB&color=9B9590&rounded=true&bold=true" alt="User" class="rounded-circle" width="32" height="32" style="min-width: 32px;">
-        <div class="flex-grow-1 overflow-hidden link-text" style="text-align: left;">
-          <div class="text-truncate small fw-semibold" style="color: var(--ht-text);">Alex Rivera</div>
-          <div class="text-truncate" style="font-size: 0.7rem; color: var(--ht-text-muted);">alex&#64;ejemplo.com</div>
+      <button class="btn btn-ghost w-100 p-2 d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img [src]="userPhoto || 'https://ui-avatars.com/api/?name=' + userName + '&background=F5F0EB&color=9B9590&rounded=true&bold=true'" 
+             alt="User" class="rounded-circle profile-img" width="32" height="32" 
+             style="min-width: 32px; object-fit: cover;"
+             (click)="navigateToSettings($event)">
+        <div class="flex-grow-1 overflow-hidden link-text" style="text-align: left;" (click)="navigateToSettings($event)">
+          <div class="text-truncate small fw-semibold" style="color: var(--ht-text);">{{userName}}</div>
+          <div class="text-truncate" style="font-size: 0.7rem; color: var(--ht-text-muted);">{{userEmail}}</div>
         </div>
+        <i class="bi bi-three-dots-vertical text-muted smaller opacity-50"></i>
       </button>
       <ul class="dropdown-menu shadow border-0 py-1">
-        <li><a class="dropdown-item py-2" href="#"><i class="bi bi-person me-2"></i> Perfil</a></li>
-        <li><a class="dropdown-item py-2 text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión</a></li>
+        <li><a class="dropdown-item py-2" routerLink="/settings" (click)="onClose()"><i class="bi bi-gear me-2"></i> Ajustes</a></li>
+        <li><hr class="dropdown-divider mx-2 my-1"></li>
+        <li><a class="dropdown-item py-2 text-danger" href="javascript:void(0)" (click)="logout()"><i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión</a></li>
       </ul>
     </div>
   </div>

@@ -9,7 +9,7 @@ import { dataSettingsResolver } from './core/resolver/data-settings.resolver';
 import { dataHabitsResolver } from './core/resolver/data-habits.resolver';
 
 export const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: DashboardComponent, resolve: { data: dataHabitsResolver } },
   { path: 'analytics', component: AnalyticsComponent, resolve: { data: dataHabitsResolver } },
   { path: 'settings', component: SettingsComponent,resolve:{data:dataSettingsResolver} },
   { path: 'sign-in', component: SignInComponent },

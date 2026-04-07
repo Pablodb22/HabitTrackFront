@@ -27,4 +27,8 @@ export class HabitoService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
+  getWeeklyStats(email: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${email}/weekly`);
+  }
+
 }

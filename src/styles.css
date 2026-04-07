@@ -502,17 +502,109 @@ h1, h2, h3, h4, h5, h6 {
   animation: float-slow-circle 8s ease-in-out infinite;
 }
 
-/* Auth page specific */
-.auth-panel {
-  background: var(--ht-cream);
+/* ── Shared Analytics Styles (Reused across Dashboard and Analytics) ── */
+.kpi-card {
   position: relative;
-  overflow: hidden;
+  background: white;
   border-radius: var(--ht-radius);
+  padding: 1.5rem;
+  overflow: hidden;
+  transition: var(--ht-transition);
+  border: none;
 }
 
-.auth-visual {
-  background: var(--ht-sidebar-bg);
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(45, 42, 38, 0.08) !important;
+}
+
+.kpi-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.kpi-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.kpi-content .kpi-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--ht-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+}
+
+.kpi-content .kpi-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ht-text);
+  line-height: 1;
+}
+
+.kpi-value .unit {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ht-text-muted);
+  margin-left: 0.15rem;
+}
+
+.kpi-chart-mini-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+
+/* Bar Chart */
+.bar-pill-outer {
+  width: 32px;
+  background-color: var(--ht-cream);
+  border-radius: 100px;
   position: relative;
   overflow: hidden;
-  border-radius: var(--ht-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
 }
+
+.bar-pill-inner {
+  width: 100%;
+  border-radius: 100px;
+  position: relative;
+  min-height: 4px;
+}
+
+.bar-wrapper {
+  height: 100%;
+  flex: 1;
+}
+
+.day-name {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Color Helpers for Analytics */
+.bg-rose-soft    { background-color: rgba(242, 215, 217, 0.4); }
+.bg-sage-soft    { background-color: rgba(212, 226, 212, 0.4); }
+.bg-peach-soft   { background-color: rgba(245, 221, 208, 0.4); }
+.bg-lavender-soft{ background-color: rgba(221, 214, 232, 0.4); }
+
+.text-rose-dark    { color: #8B5E5E; }
+.text-sage-dark    { color: #4A6B4A; }
+.text-peach-dark   { color: #8B5E3E; }
+.text-lavender-dark{ color: #5E4D7A; }

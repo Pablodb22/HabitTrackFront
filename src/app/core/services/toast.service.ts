@@ -18,11 +18,9 @@ export class ToastService {
     const id = Math.random().toString(36).substring(2, 9);
     const toast: Toast = { id, message, type };
     const currentToasts = this.toastsSubject.getValue();
-    
-    // Añadir el nuevo toast al array
+       
     this.toastsSubject.next([...currentToasts, toast]);
-
-    // Eliminarlo automáticamente después de 4 segundos
+  
     setTimeout(() => {
       this.remove(id);
     }, 4000);

@@ -1,56 +1,60 @@
 <div class="container-fluid p-0">
-  <!-- KPI Cards -->
-  <div class="row g-3 mb-5">
+  <!-- KPI Cards (Adapted from Analytics) -->
+  <div class="row g-4 mb-5">
     <div class="col-md-3">
-      <div class="card card-tinted-rose p-4" style="border: none;">
-        <div class="d-flex align-items-center gap-3">
-          <div class="kpi-icon bg-rose" style="background: rgba(242,215,217,0.6);">
-            <i class="bi bi-lightning-charge" style="color: #8B5E5E;"></i>
+      <div class="kpi-card shadow-sm">
+        <div class="kpi-inner">
+          <div class="kpi-icon-wrap bg-rose-soft">
+            <i class="bi bi-lightning-charge-fill text-rose-dark"></i>
           </div>
-          <div>
-            <div class="page-subtitle mb-1" style="font-size: 0.75rem;">Activos</div>
-            <div class="h3 mb-0 fw-bold">12</div>
+          <div class="kpi-content">
+            <span class="kpi-label">Pendientes</span>
+            <div class="kpi-value">{{stats.activos}}</div>
           </div>
         </div>
+        <div class="kpi-chart-mini-line bg-rose"></div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="card card-tinted-sage p-4" style="border: none;">
-        <div class="d-flex align-items-center gap-3">
-          <div class="kpi-icon bg-sage" style="background: rgba(212,226,212,0.6);">
-            <i class="bi bi-check2-all" style="color: #4A6B4A;"></i>
+      <div class="kpi-card shadow-sm">
+        <div class="kpi-inner">
+          <div class="kpi-icon-wrap bg-sage-soft">
+            <i class="bi bi-check2-circle text-sage-dark"></i>
           </div>
-          <div>
-            <div class="page-subtitle mb-1" style="font-size: 0.75rem;">Completados</div>
-            <div class="h3 mb-0 fw-bold">8</div>
+          <div class="kpi-content">
+            <span class="kpi-label">Completados</span>
+            <div class="kpi-value">{{stats.completados}}</div>
           </div>
         </div>
+        <div class="kpi-chart-mini-line bg-sage"></div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="card card-tinted-peach p-4" style="border: none;">
-        <div class="d-flex align-items-center gap-3">
-          <div class="kpi-icon bg-peach" style="background: rgba(245,221,208,0.6);">
-            <i class="bi bi-fire" style="color: #8B5E3E;"></i>
+      <div class="kpi-card shadow-sm">
+        <div class="kpi-inner">
+          <div class="kpi-icon-wrap bg-peach-soft">
+            <i class="bi bi-fire text-peach-dark"></i>
           </div>
-          <div>
-            <div class="page-subtitle mb-1" style="font-size: 0.75rem;">Mejor racha</div>
-            <div class="h3 mb-0 fw-bold">45<span class="fw-normal" style="font-size: 0.875rem; color: var(--ht-text-muted);">d</span></div>
+          <div class="kpi-content">
+            <span class="kpi-label">Mejor racha</span>
+            <div class="kpi-value">{{stats.bestStreak}} <span class="unit">días</span></div>
           </div>
         </div>
+        <div class="kpi-chart-mini-line bg-peach"></div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="card card-tinted-lavender p-4" style="border: none;">
-        <div class="d-flex align-items-center gap-3">
-          <div class="kpi-icon bg-lavender" style="background: rgba(221,214,232,0.6);">
-            <i class="bi bi-graph-up-arrow" style="color: #5E4D7A;"></i>
+      <div class="kpi-card shadow-sm">
+        <div class="kpi-inner">
+          <div class="kpi-icon-wrap bg-lavender-soft">
+            <i class="bi bi-graph-up-arrow text-lavender-dark"></i>
           </div>
-          <div>
-            <div class="page-subtitle mb-1" style="font-size: 0.75rem;">Consistencia</div>
-            <div class="h3 mb-0 fw-bold">94<span class="fw-normal" style="font-size: 0.875rem; color: var(--ht-text-muted);">%</span></div>
+          <div class="kpi-content">
+            <span class="kpi-label">Consistencia</span>
+            <div class="kpi-value">{{stats.consistencia}}%</div>
           </div>
         </div>
+        <div class="kpi-chart-mini-line bg-lavender"></div>
       </div>
     </div>
   </div>
@@ -59,143 +63,82 @@
     <!-- Daily Habits -->
     <div class="col-lg-7">
       <div class="mb-3 d-flex justify-content-between align-items-center">
-        <h3 class="h6 fw-semibold mb-0">Hábitos del día</h3>
-        <span class="page-subtitle">3 pendientes</span>
+        <div class="d-flex align-items-center gap-2">
+            <h3 class="h5 fw-bold mb-0">Mis Hábitos</h3>
+            <span class="pulse-dot" *ngIf="stats.activos > 0"></span>
+        </div>
+        <span class="page-subtitle" *ngIf="stats.activos > 0">{{stats.activos}} por completar hoy</span>
+        <span class="page-subtitle" *ngIf="stats.activos === 0 && habits.length > 0">¡Día completado! 🎉</span>
       </div>
 
-      <div class="d-flex flex-column gap-2">
-        <!-- Habit 1 (Pending) -->
-        <div class="card p-3 px-4">
+      <div class="d-flex flex-column gap-2" *ngIf="habits.length > 0; else noHabits">
+        <div class="card p-3 px-4 border-0 shadow-sm" *ngFor="let habit of habits" [class.card-tinted-sage]="habit.completo" [class.completed-item]="habit.completo">
           <div class="d-flex align-items-center gap-3">
             <div class="form-check m-0">
-              <input class="form-check-input" type="checkbox" id="h1">
+              <input class="form-check-input" type="checkbox" [id]="'h' + habit.id" [checked]="habit.completo" (change)="toggleHabit(habit)" [disabled]="habit.completo">
             </div>
             <div class="flex-grow-1">
               <div class="d-flex align-items-center justify-content-between mb-1">
-                <label for="h1" class="fw-semibold small mb-0" style="cursor: pointer;">Lectura de Arquitectura</label>
-                <span class="badge badge-lavender">Productividad</span>
+                <label [for]="'h' + habit.id" class="fw-semibold small mb-0" 
+                       [style.text-decoration]="habit.completo ? 'line-through' : 'none'"
+                       [style.color]="habit.completo ? 'var(--ht-text-muted)' : 'inherit'"
+                       style="cursor: pointer;">{{habit.nombre}}</label>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge" [ngClass]="getBadgeClass(habit.categoria)">{{habit.categoria || 'Sin categoría'}}</span>
+                </div>
               </div>
               <div class="d-flex align-items-center gap-3" style="font-size: 0.75rem; color: var(--ht-text-muted);">
-                <span><i class="bi bi-arrow-repeat me-1"></i> Diario</span>
-                <span><i class="bi bi-fire me-1"></i> 12d racha</span>
+                <span><i class="bi bi-arrow-repeat me-1"></i> {{habit.frecuencia || 'Diario'}}</span>
+                <span [class.text-sage]="habit.completo"><i class="bi bi-fire me-1"></i> {{habit.currentStreak || 0}}d racha</span>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Habit 2 (Completed) -->
-        <div class="card card-tinted-sage p-3 px-4 completed-item">
-          <div class="d-flex align-items-center gap-3">
-            <div class="form-check m-0">
-              <input class="form-check-input" type="checkbox" id="h2" checked>
-            </div>
-            <div class="flex-grow-1">
-              <div class="d-flex align-items-center justify-content-between mb-1">
-                <label for="h2" class="fw-semibold small mb-0" style="text-decoration: line-through; color: var(--ht-text-muted);">Sprint de Codificación</label>
-                <span class="badge badge-sage">Desarrollo</span>
-              </div>
-              <div class="d-flex align-items-center gap-3" style="font-size: 0.75rem; color: var(--ht-text-muted);">
-                <span><i class="bi bi-arrow-repeat me-1"></i> Diario</span>
-                <span><i class="bi bi-fire me-1"></i> 8d racha</span>
-              </div>
-            </div>            
-          </div>
-        </div>
-
-        <!-- Habit 3 (Pending) -->
-        <div class="card p-3 px-4">
-          <div class="d-flex align-items-center gap-3">
-            <div class="form-check m-0">
-              <input class="form-check-input" type="checkbox" id="h3">
-            </div>
-            <div class="flex-grow-1">
-              <div class="d-flex align-items-center justify-content-between mb-1">
-                <label for="h3" class="fw-semibold small mb-0" style="cursor: pointer;">Entrenamiento Físico</label>
-                <span class="badge badge-sky">Salud</span>
-              </div>
-              <div class="d-flex align-items-center gap-3" style="font-size: 0.75rem; color: var(--ht-text-muted);">
-                <span><i class="bi bi-arrow-repeat me-1"></i> Lu, Mi, Vi</span>
-                <span><i class="bi bi-fire me-1"></i> 24d racha</span>
-              </div>
-            </div>            
-          </div>
-        </div>
-
-        <!-- Habit 4 (Pending) -->
-        <div class="card p-3 px-4">
-          <div class="d-flex align-items-center gap-3">
-            <div class="form-check m-0">
-              <input class="form-check-input" type="checkbox" id="h4">
-            </div>
-            <div class="flex-grow-1">
-              <div class="d-flex align-items-center justify-content-between mb-1">
-                <label for="h4" class="fw-semibold small mb-0" style="cursor: pointer;">Meditación</label>
-                <span class="badge badge-peach">Mental</span>
-              </div>
-              <div class="d-flex align-items-center gap-3" style="font-size: 0.75rem; color: var(--ht-text-muted);">
-                <span><i class="bi bi-arrow-repeat me-1"></i> Diario</span>
-                <span><i class="bi bi-fire me-1"></i> 15d racha</span>
-              </div>
-            </div>            
           </div>
         </div>
       </div>
+
+      <ng-template #noHabits>
+        <div class="card p-5 text-center bg-white border-0 shadow-sm rounded-4">
+          <div class="mb-3 text-muted">
+            <i class="bi bi-calendar2-plus" style="font-size: 3rem; color: var(--ht-accent-soft);"></i>
+          </div>
+          <h5 class="fw-bold">No tienes hábitos aún</h5>
+          <p class="text-muted small mb-4">¡Comienza creando tu primer hábito para mejorar tu rutina!</p>
+          <a class="btn btn-primary px-4 py-2 mx-auto d-block" routerLink="/my-habits" style="max-width: 180px;">Crear Hábito</a>
+        </div>
+      </ng-template>
     </div>
 
-    <!-- Right Column -->
+    <!-- Right Column (Adapted chart from Analytics) -->
     <div class="col-lg-5">
       <div class="d-flex flex-column gap-4">
         <!-- Weekly Bar Chart -->
-        <div class="card p-4">
-          <h3 class="h6 fw-semibold mb-4">Consistencia semanal</h3>
-          <div class="d-flex align-items-end justify-content-between" style="height: 100px;">
-            <div class="rounded-top" style="width: 11%; height: 40%; background: var(--ht-sage);"></div>
-            <div class="rounded-top" style="width: 11%; height: 60%; background: var(--ht-lavender);"></div>
-            <div class="rounded-top" style="width: 11%; height: 55%; background: var(--ht-sage);"></div>
-            <div class="rounded-top" style="width: 11%; height: 80%; background: var(--ht-lavender);"></div>
-            <div class="rounded-top" style="width: 11%; height: 70%; background: var(--ht-sage);"></div>
-            <div class="rounded-top" style="width: 11%; height: 95%; background: var(--ht-accent-soft);"></div>
-            <div class="rounded-top" style="width: 11%; height: 45%; background: var(--ht-cream);"></div>
-          </div>
-          <div class="d-flex justify-content-between mt-2" style="font-size: 0.6875rem; color: var(--ht-text-muted);">
-            <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+        <div class="card p-4 border-0 shadow-sm">
+          <h3 class="h6 fw-bold mb-1">Actividad Semanal</h3>
+          <p class="text-muted small mb-5">Progreso diario de lunes a domingo</p>
+          
+          <div class="bar-chart-container d-flex align-items-end justify-content-between px-3" style="height: 220px;">
+            <div *ngFor="let day of weeklyProgress" class="bar-wrapper d-flex flex-column align-items-center gap-3 h-100">
+              <div class="bar-pill-outer" style="width: 32px;">
+                 <div class="bar-pill-inner transition-all" 
+                      [style.height]="day.percentage + '%'"
+                      [style.background]="day.percentage > 80 ? 'var(--ht-sage)' : (day.percentage > 40 ? 'var(--ht-sky)' : 'var(--ht-peach)')">
+                </div>
+              </div>
+              <span class="day-name fw-bold" style="font-size: 0.65rem; color: var(--ht-text-muted);">{{ day.day }}</span>
+            </div>
           </div>
         </div>
 
-        <!-- Heatmap -->
-        <div class="card p-4">
-          <h3 class="h6 fw-semibold mb-3">Actividad</h3>
-          <div class="d-flex flex-wrap gap-1">
-            <div class="heatmap-cell level-1"></div>
-            <div class="heatmap-cell level-2"></div>
-            <div class="heatmap-cell level-1"></div>
-            <div class="heatmap-cell"></div>
-            <div class="heatmap-cell level-3"></div>
-            <div class="heatmap-cell"></div>
-            <div class="heatmap-cell level-4"></div>
-            <div class="heatmap-cell level-2"></div>
-            <div class="heatmap-cell level-1"></div>
-            <div class="heatmap-cell level-1"></div>
-            <div class="heatmap-cell level-3"></div>
-            <div class="heatmap-cell"></div>
-            <div class="heatmap-cell level-1"></div>
-            <div class="heatmap-cell level-2"></div>
-            <div class="heatmap-cell level-4"></div>
-            <div class="heatmap-cell level-1"></div>
-            <div class="heatmap-cell"></div>
-            <div class="heatmap-cell level-3"></div>
-            <div class="heatmap-cell level-1"></div>
-            <div class="heatmap-cell"></div>
-            <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]" class="heatmap-cell" [ngClass]="{'level-1': i%3==0, 'level-2': i%5==0, 'level-3': i%7==0}"></div>
+  
+        <!-- Motivational Tip -->
+        <div class="card p-4 bg-lavender-soft border-0 shadow-sm" style="border-radius: var(--ht-radius);">
+          <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="bi bi-quote text-lavender-dark h4 mb-0"></i>
+              <h3 class="h6 fw-bold mb-0 text-lavender-dark">Recordatorio</h3>
           </div>
-          <div class="d-flex align-items-center justify-content-end gap-1 mt-3" style="font-size: 0.625rem; color: var(--ht-text-muted);">
-            <span>Menos</span>
-            <div class="heatmap-cell" style="width: 9px; height: 9px;"></div>
-            <div class="heatmap-cell level-1" style="width: 9px; height: 9px;"></div>
-            <div class="heatmap-cell level-2" style="width: 9px; height: 9px;"></div>
-            <div class="heatmap-cell level-3" style="width: 9px; height: 9px;"></div>
-            <div class="heatmap-cell level-4" style="width: 9px; height: 9px;"></div>
-            <span>Más</span>
+          <p class="small mb-0 fw-medium" style="color: #5E4D7A; line-height: 1.6;">"El éxito es la suma de pequeños esfuerzos repetidos día tras día."</p>
+          <div class="mt-3 d-flex justify-content-end">
+              <span class="text-muted" style="font-size: 0.7rem;">— Robert Collier</span>
           </div>
         </div>
       </div>
