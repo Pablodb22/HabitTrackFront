@@ -1,59 +1,68 @@
-# HabitTrackFront
+# HabitTrack - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.22.
+Este es el frontend de la aplicación web **HabitTrack**. La interfaz ha sido desarrollada para ser moderna, rápida, responsiva y ofrecer la mejor experiencia de usuario en el seguimiento y análisis de sus hábitos.
 
-## Development server
+## 🛠️ Tecnologías y Herramientas
 
-To start a local development server, run:
+- **Framework Principal:** Angular 19.2
+- **Lenguaje:** TypeScript / HTML / CSS
+- **Estilos y UI:** Bootstrap 5.3 y Bootstrap Icons
+- **Server Side Rendering (SSR):** Angular SSR (`@angular/ssr`) está en uso para mejorar el rendimiento inicial y el SEO.
+- **Herramientas Reactivas:** RxJS
+- **Gestión de Paquetes:** npm
+
+## 🚀 Requisitos Previos
+
+Para ejecutar y seguir desarrollando este proyecto, necesitas disponer de:
+
+- **Node.js** (versión recomendada 18.x o superior)
+- **npm** (viene incorporado por defecto al instalar Node.js)
+- **Angular CLI** instalado globalmente (`npm install -g @angular/cli`)
+
+## 📦 Instalación
+
+Abre tu consola de comandos (terminal), ubícate en la carpeta raíz del proyecto frontend (`HabitTrackFront`) e instala las dependencias:
+
+```bash
+npm install
+```
+
+## 🏃 Servidor de Desarrollo Local
+
+Para lanzar la aplicación web en tu entorno de desarrollo y poder ver los cambios en directo:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Una vez finalizada la compilación, abre tu navegador de preferencia y ve a `http://localhost:4200/`. 
+La aplicación aprovechará la recarga automática (Live Reloading) cada vez que realices cambios físicos en los archivos fuente para mostrarlos de forma inmediata.
 
-## Code scaffolding
+## 🏗️ Arquitectura y Estructuración
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Componentación:** El código se encuentra muy estructurado en componentes que promueven la mantenibilidad (ejemplo: un `ChatbotComponent` dedicado bajo `src/app/shared/components/chatbot`).
+- **Layouts y Vistas Diferenciadas:** Se separan de manera clara las vistas que no demandan menú lateral o un layout de navegación, como las páginas de *Sign-In* o de *Create Account*.
+- **Integración Backend:** Todos los flujos se comunican en tiempo real mediante el módulo `HttpClient` de Angular con la API Rest de nuestro entorno `HabitTrackBack` (Spring).
+- **Asistente Inteligente:** Se implementa un Chat Inteligente conectado a los modelos de Gemini de Google para brindar soporte o ayuda dentro de la web.
+
+## 🔨 Scaffolding (Generación Rápida)
+
+Angular CLI contiene comandos que te van a ahorrar tiempo desarrollando componentes o módulos:
 
 ```bash
-ng generate component component-name
+# Para crear un nuevo componente:
+ng generate component mi-nuevo-componente
+
+# Para crear un servicio:
+ng generate service mi-nuevo-servicio
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🚀 Construcción para Producción
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Para compilar el proyecto de cara a un servidor o entorno de producción, utiliza:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Angular creará todos los bundles y archivos dentro de una carpeta llamada `dist/`. La app ya se encuentra optimizada para la carga en servidores. Si deseas aprovechar el *Server Side Rendering (SSR)*, tendrás que iniciar el servicio Express/Node generado en dicha ruta.
