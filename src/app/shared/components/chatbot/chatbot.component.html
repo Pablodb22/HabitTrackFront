@@ -8,8 +8,7 @@
     </div>
     
     <div class="chatbot-messages">
-      <div class="message" *ngFor="let msg of messages" [class.message-bot]="msg.from === 'bot'" [class.message-user]="msg.from === 'user'">
-        {{ msg.text }}
+      <div class="message" *ngFor="let msg of messages" [class.message-bot]="msg.from === 'bot'" [class.message-user]="msg.from === 'user'" [innerHTML]="msg.text">
       </div>
       
       <!-- Conversation Starters (Show if only initial bot message exists) -->

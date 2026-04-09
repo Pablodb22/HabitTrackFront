@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ChatbotService } from '../../../core/services/chatbot.service';
 
 interface Message {
   from: 'bot' | 'user';
@@ -29,6 +30,8 @@ export class ChatbotComponent {
     { from: 'bot', text: '¡Hola! Soy tu asistente de HabitTrack. ¿En qué puedo ayudarte hoy?' }
   ];
 
+  private chatbotService = inject(ChatbotService);
+
   toggleChat() {
     this.isOpen = !this.isOpen;
   }
@@ -41,37 +44,35 @@ export class ChatbotComponent {
   sendMessage() {
     if (!this.userMessage.trim()) return;
     
-    this.messages.push({ from: 'user', text: this.userMessage });
-    const currentMsg = this.userMessage;
+    const userText = this.userMessage;
+    this.messages.push({ from: 'user', text: userText });
     this.userMessage = '';
     
     this.scrolltobottom();
-
     this.msgInputDisabled = true;
-    setTimeout(() => {
-      this.getBotResponse(currentMsg);
-      this.msgInputDisabled = false;
-      this.scrolltobottom();
-    }, 1000);
+
+    this.chatbotService.askChatbot(userText).subscribe({
+      next: (res: any) => {
+        this.messages.push({ from: 'bot', text: this.formatMessage(res.response) });
+        this.msgInputDisabled = false;
+        this.scrolltobottom();
+      },
+      error: (err: any) => {
+        console.error(err);
+        this.messages.push({ from: 'bot', text: 'Lo siento, hubo un error al procesar tu mensaje.' });
+        this.msgInputDisabled = false;
+        this.scrolltobottom();
+      }
+    });
   }
 
-  private getBotResponse(input: string) {
-    const text = input.toLowerCase();
-    let response = "No estoy seguro de haberte entendido. ¿Puedes explicarlo de otra forma?";
-
-    if (text.includes('hola') || text.includes('buenos')) {
-      response = "¡Hola! Qué alegría volver a verte. ¿Cómo va tu racha hoy?";
-    } else if (text.includes('hábito') || text.includes('habito') || text.includes('crear')) {
-      response = "Los hábitos son la clave del éxito. Puedes crearlos desde la sección 'Mis Hábitos'.";
-    } else if (text.includes('configuración') || text.includes('ajustes') || text.includes('perfil')) {
-      response = "Puedes cambiar tu avatar y datos personales en la pestaña de Ajustes.";
-    } else if (text.includes('estadísticas') || text.includes('progreso')) {
-      response = "¡Veo que te interesa tu progreso! En 'Analytics' tienes gráficos detallados.";
-    } else if (text.includes('gracias')) {
-      response = "¡De nada! Aquí estaré si me necesitas.";
-    }
-
-    this.messages.push({ from: 'bot', text: response });
+  formatMessage(text: string): string {
+    if (!text) return '';
+    // Negritas: **texto** -> <strong>texto</strong>
+    let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    // Saltos de línea: \n -> <br>
+    formatted = formatted.replace(/\n/g, '<br>');
+    return formatted;
   }
 
   private scrolltobottom() {
